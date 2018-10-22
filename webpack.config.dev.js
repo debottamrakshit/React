@@ -20,6 +20,7 @@ export default {
     contentBase: './src'
   },
   plugins: [
+
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
