@@ -5,7 +5,7 @@ import LoadingDots from './LoadingDots';
 const Header = ({loading}) => {
   return (
     <nav>
-     
+      
     </nav>
   );
 };

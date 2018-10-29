@@ -1,13 +1,12 @@
 /*eslint-disable import/default */
 import 'babel-polyfill';
 import React from 'react';
-import { render } from 'react-dom';
-import {Provider} from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import ReactDom from 'react-dom';
+import App from './components/App';
 import './styles/styles.css'; //Webpack can import CSS files too!
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import registerServiceWorker from './registerServiceWorker';
 
 
-render(
- <div></div>,document.getElementById('app')
-);
+ReactDom.render(<App/>, document.getElementById('app'));
+registerServiceWorker();
