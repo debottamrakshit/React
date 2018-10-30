@@ -9,28 +9,28 @@ const products = [
     title: "Product1",
     img: "img1",
     description: "Product1 description",
-    price: "6:20",
+    price: "6:20"
   },
   {
     id: "2",
     title: "Product2",
     img: "img2",
     description: "Product1 description",
-    price: "6:20",
+    price: "6:20"
   },
   {
     id: "3",
     title: "Product3",
     img: "img3",
     description: "Product1 description",
-    price: "6:20",
+    price: "6:20"
   },
   {
     id: "4",
     title: "Product4",
     img: "img4",
     description: "Product1 description",
-    price: "6:20",
+    price: "6:20"
   }
 ];
 
@@ -42,3 +42,4 @@ class ProductApi {
       }, delay);
     });
   }
+}
