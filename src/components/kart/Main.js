@@ -1,6 +1,6 @@
 import React from 'react';
 import {jumbotron} from 'bootstrap';
-import Checkout from './checkout';
+import Checkout from './Checkout';
 
 
 export default class Main extends React.Component{
@@ -11,7 +11,7 @@ export default class Main extends React.Component{
                     This is main page
                 </div>
                 <div>
-                        <Checkout />
+                      <Checkout />
                 </div>    
             </div>
         );

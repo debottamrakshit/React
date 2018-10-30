@@ -1,6 +1,6 @@
 import React from 'react';
 import Main from '../components/kart/Main.js';
-import '../styles/styles.css';
+
 import Header from '../components/common/Header';
 
 class App extends React.Component{
@@ -10,7 +10,7 @@ class App extends React.Component{
     }
     render(){
         return (
-            <div className="app">
+            <div className="container">
                 <Header />
                 <Main />              
             </div>
