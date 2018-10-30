@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import AddressForm from './AddressForm';
 
 
-export default class Checkout extends PureComponent {
+export default class Checkout {
   render() {
     return (
       <div>
