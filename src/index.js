@@ -3,7 +3,7 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDom from 'react-dom';
 import App from './components/App';
-import './styles/styles.css'; //Webpack can import CSS files too!
+import '../../shared/styles/styles.css'; //Webpack can import CSS files too!
 import 'bootstrap/dist/css/bootstrap.min.css';
 import registerServiceWorker from './registerServiceWorker';
 import routes from './routes';
