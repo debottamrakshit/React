@@ -1,15 +1,24 @@
 /*eslint-disable import/default */
 import 'babel-polyfill';
 import React from 'react';
-import ReactDom from 'react-dom';
-import App from './components/App';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import registerServiceWorker from './registerServiceWorker';
-import routes from './routes';
+import {render} from 'react-dom';
+import {Provider} from 'react-redux';
 import {Router, browserHistory} from 'react-router';
 
+import configureStore from './store/configureStore';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import routes from './routes';
+import App from './components/App';
+import {loadCheckout} from './actions/checkoutAction';
 
 
-ReactDom.render(<App/>, document.getElementById('app'));
-<Router history={browserHistory} routes={routes}/>
-registerServiceWorker();
+const store = configureStore();
+store.dispatch(loadCheckout());
+
+render(        
+    <Provider store={store}>
+        <Router history={browserHistory} routes={routes}/>
+    </Provider> , document.getElementById('app')
+);
+    
