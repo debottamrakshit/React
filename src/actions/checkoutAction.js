@@ -1,7 +1,7 @@
 import checkoutApi from '../api/checkoutApi';
 import * as TYPES from '../actions/actionTypes'
-export function loadCheckoutActionSuccess(apiAddress){
-    return {type: TYPES.LOAD_ADDRESS_SUCCESS, apiAddress};
+export function loadCheckoutActionSuccess(apiCheckout){
+    return {type: TYPES.LOAD_CHECKOUT_SUCCESS, apiCheckout};
 }
 
 export function saveCheckoutDetailsSuccess(checkout){
@@ -10,8 +10,8 @@ export function saveCheckoutDetailsSuccess(checkout){
 
 export function loadCheckout(){  
     return function(dispatch){        
-        return checkoutApi.getCheckoutInfo().then(apiAddress => {
-            dispatch(loadCheckoutActionSuccess(apiAddress));
+        return checkoutApi.getCheckoutInfo().then(apiCheckout => {
+            dispatch(loadCheckoutActionSuccess(apiCheckout));
         }).catch(error => {
             throw(error);
         });

@@ -4,13 +4,15 @@ import {connect} from 'react-redux';
 import checkoutApi from '../../api/checkoutApi';
 import {bindActionCreators} from 'redux';
 import * as checkoutAction from '../../actions/checkoutAction';
+import KartItemList from './KartItemList';
 
 class Checkout extends React.Component{
 
   constructor(props, context){
     super(props, context);
     this.state = {
-      address: Object.assign({}, props.address)
+      address: [],
+      checkout: Object.assign({}, props.checkout)      
     };
    this.changeDataOnPage=this.changeDataOnPage.bind(this);
    this.saveCheckoutInformation=this.saveCheckoutInformation.bind(this);
@@ -18,7 +20,7 @@ class Checkout extends React.Component{
 
 //This method execute before render DOM
 componentWillMount(){
-  console.log("Inside componentWillMount method: values : {"+this.props.address+"}");
+  //console.log("Inside componentWillMount method: values : {"+this.props.address+"}");
   console.log("countries: "+this.props.countries);  
 }
 //This method execute after render DOM
@@ -33,15 +35,15 @@ componentDidMount(){
   changeDataOnPage(event){    
     console.log("Inside changeDataOnPage method event Handler  state object: { "+state+" }");
     const field = event.target.name;     
-    address = this.state.apiAddress;    
+    address = this.state.address;    
     address[field] = event.target.value;
-    return this.setState({address:address});
+   return this.setState({address:address});
   }
 
   saveCheckoutInformation(event){
     console.log("Inside saveCheckoutInformation method event Handler state object: { "+state+" }");
-    event.preventDefault();
-    this.props.actions.saveCheckoutInfo(this.state.address).then(() => this.redirect());
+    //event.preventDefault();
+   // this.props.actions.saveCheckoutInfo(this.state.address).then(() => this.redirect());
   }
 
   render() {
@@ -49,16 +51,16 @@ componentDidMount(){
       <div>
          <p>This is checkout page</p>
          <AddressForm address={this.props.address} onChnage={this.changeDataOnPage} onSave={this.saveCheckoutInformation} countries={this.props.countries}/>
+         <KartItemList kartItems={this.props.product} />
       </div>
     )
   }
 }
 
 Checkout.propTypes = {  
-  address: PropTypes.array.isRequired,
+  checkout: PropTypes.object.isRequired,
   countries: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
-
 }
 
 
@@ -75,13 +77,20 @@ function mapStateToProps(state){
     });
   }
 
-  let addressValue = {};
-  if(state.address){
-    addressValue = state.address[0];
+  let address = {};
+  let product = [];
+  if(state.checkout){
+    let checkoutItem = state.checkout[0];
+    if(checkoutItem){
+      if(checkoutItem.address.length > 0)
+        address = checkoutItem.address[0];
+       product = checkoutItem.product;
+    }
   }
-  console.log(addressValue);
+  console.log(address);
   return{    
-      address: addressValue, 
+      address: address, 
+      product: product,
       countries: formattedDropDown
     };
 }
