@@ -1,3 +1,4 @@
 export default{
-    checkout: []
+    checkout: [], 
+    countries: []
 };

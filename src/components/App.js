@@ -1,7 +1,6 @@
-import React from 'react';
-import Main from '../components/kart/Main.js';
-
+import React, {PropTypes} from 'react';
 import Header from '../components/common/Header';
+import {connect} from 'react-redux';
 
 class App extends React.Component{
 
@@ -11,11 +10,19 @@ class App extends React.Component{
     render(){
         return (
             <div className="container">
-                <Header />
-                <Main />              
+                <Header />  
+                {this.props.children}      
             </div>
         );
     }
 }
+App.propTypes={
+    children: PropTypes.object.isRequired
+};
 
-export default App;
+function mapStateToProps(state, ownProps){
+    return {
+        
+        };
+}
+export default connect(mapStateToProps)(App);

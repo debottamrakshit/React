@@ -11,10 +11,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import routes from './routes';
 import App from './components/App';
 import {loadCheckout} from './actions/checkoutAction';
+import {loadCountries} from './actions/countryAction';
 
 
 const store = configureStore();
 store.dispatch(loadCheckout());
+store.dispatch(loadCountries());
+
+store.subscribe( () => {
+    console.log('state\n', store.getState());    
+  });
 
 render(        
     <Provider store={store}>

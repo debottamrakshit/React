@@ -1,6 +1,4 @@
 import delay from './delay';
-
-
 const ADDRESS = [  
     {  
         "id":"user_001",
@@ -9,7 +7,7 @@ const ADDRESS = [
         "address_city":"NOIDA",
         "address_state":"UTTAR PRADESH",
         "address_zip":"201301",
-        "address_country":"India"
+        "address_country":"IN"
      }
  ];
 

@@ -10,26 +10,36 @@ class Checkout extends React.Component{
   constructor(props, context){
     super(props, context);
     this.state = {
-      address: Object.assign({}, props.address)     
+      address: Object.assign({}, props.address)
     };
    this.changeDataOnPage=this.changeDataOnPage.bind(this);
    this.saveCheckoutInformation=this.saveCheckoutInformation.bind(this);
   }
 
+//This method execute before render DOM
+componentWillMount(){
+  console.log("Inside componentWillMount method: values : {"+this.props.address+"}");
+  console.log("countries: "+this.props.countries);  
+}
+//This method execute after render DOM
+componentDidMount(){
+  console.log("Inside componentDidMount method");  
+}
+
   componentWillReceiveProps(newProps){
-    alert(newProps);
-    this.setState({address: Object.assign({}, newProps.address)});
+    console.log("Inside componentWillMount method  state object: {  }");
   }
 
   changeDataOnPage(event){    
+    console.log("Inside changeDataOnPage method event Handler  state object: { "+state+" }");
     const field = event.target.name;     
-    checkout = this.state.address;
-    address = checkout;
+    address = this.state.apiAddress;    
     address[field] = event.target.value;
-    this.setState({address:address});
+    return this.setState({address:address});
   }
 
   saveCheckoutInformation(event){
+    console.log("Inside saveCheckoutInformation method event Handler state object: { "+state+" }");
     event.preventDefault();
     this.props.actions.saveCheckoutInfo(this.state.address).then(() => this.redirect());
   }
@@ -38,34 +48,49 @@ class Checkout extends React.Component{
     return (
       <div>
          <p>This is checkout page</p>
-         <AddressForm address={this.props.address} onChnage={this.changeDataOnPage} onSave={this.saveCheckoutInformation}/>
+         <AddressForm address={this.props.address} onChnage={this.changeDataOnPage} onSave={this.saveCheckoutInformation} countries={this.props.countries}/>
       </div>
     )
   }
 }
 
 Checkout.propTypes = {  
-  address: PropTypes.object.isRequired,
+  address: PropTypes.array.isRequired,
+  countries: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 
 }
 
+
 function mapStateToProps(state){  
-  console.log(state.address);
-return{    
-    address: state.address
-  };
+  console.log("Inside mapStateToProps method state object: { "+state+" }");
+  
+  let formattedDropDown = [];
+  if(state.countries && state.countries.length > 0){
+    formattedDropDown = state.countries.map(country =>{
+      return{
+        value: country.code,
+        text: country.name
+      };
+    });
+  }
+
+  let addressValue = {};
+  if(state.address){
+    addressValue = state.address[0];
+  }
+  console.log(addressValue);
+  return{    
+      address: addressValue, 
+      countries: formattedDropDown
+    };
 }
 
 function mapDispatchToAction(dispatch){
+  console.log("Inside mapDispatchToAction method");
   return{
-    actions: bindActionCreators(checkoutAction, dispatch)
-  }
+    actions: bindActionCreators(checkoutAction, dispatch)    
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToAction)(Checkout);
-
-
-
-
-
