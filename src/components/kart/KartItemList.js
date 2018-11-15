@@ -7,7 +7,7 @@ const KartItemList = ({kartItems}) => {
             <div className="row">
                 {kartItems.map(item =>
                        <ItemRow product={item} /> 
-                )};
+                )};              
             </div>
         </div> 
 

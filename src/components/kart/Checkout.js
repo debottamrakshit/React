@@ -5,14 +5,15 @@ import checkoutApi from '../../api/checkoutApi';
 import {bindActionCreators} from 'redux';
 import * as checkoutAction from '../../actions/checkoutAction';
 import KartItemList from './KartItemList';
+import {browserHistory} from 'react-router';
 
 class Checkout extends React.Component{
 
   constructor(props, context){
     super(props, context);
     this.state = {
-      address: [],
-      checkout: Object.assign({}, props.checkout)      
+      address: Object.assign([], props.address),
+      product: Object.assign([], props.product)
     };
    this.changeDataOnPage=this.changeDataOnPage.bind(this);
    this.saveCheckoutInformation=this.saveCheckoutInformation.bind(this);
@@ -20,52 +21,70 @@ class Checkout extends React.Component{
 
 //This method execute before render DOM
 componentWillMount(){
-  //console.log("Inside componentWillMount method: values : {"+this.props.address+"}");
-  console.log("countries: "+this.props.countries);  
+  console.log("Inside componentWillMount method: values : checkout.js");
+  //console.log("countries: "+this.props.countries);  
 }
 //This method execute after render DOM
 componentDidMount(){
-  console.log("Inside componentDidMount method");  
+  console.log("Inside componentDidMount method of : checkout.js");  
+  
 }
 
   componentWillReceiveProps(newProps){
-    console.log("Inside componentWillMount method  state object: {  }");
+    console.log("Inside componentWillReceiveProps method  : checkout.js");
+
   }
 
   changeDataOnPage(event){    
-    console.log("Inside changeDataOnPage method event Handler  state object: { "+state+" }");
+    console.log("Inside changeDataOnPage method event Handler  state object: { "+event.target.name+" }");
     const field = event.target.name;     
-    address = this.state.address;    
+    let address = this.state.address;    
     address[field] = event.target.value;
-   return this.setState({address:address});
+    return this.setState({address:address});
   }
 
   saveCheckoutInformation(event){
-    console.log("Inside saveCheckoutInformation method event Handler state object: { "+state+" }");
-    //event.preventDefault();
-   // this.props.actions.saveCheckoutInfo(this.state.address).then(() => this.redirect());
+    console.log("Inside saveCheckoutInformation method event Handler state object: { "+this.state+" }");
+    event.preventDefault();
+
+    let checkoutSubmit = []; 
+    
+    checkoutSubmit.address=this.state.address;
+    checkoutSubmit.product=this.state.product;   
+    
+    this.props.actions.saveCheckout(checkoutSubmit).then(() => this.redirect());
+  }
+
+  redirect(){
+    browserHistory.push("/checkoutSummary");
   }
 
   render() {
     return (
       <div>
          <p>This is checkout page</p>
-         <AddressForm address={this.props.address} onChnage={this.changeDataOnPage} onSave={this.saveCheckoutInformation} countries={this.props.countries}/>
+         <AddressForm address={this.props.address} 
+            onChange={this.changeDataOnPage} 
+            onSave={this.saveCheckoutInformation} 
+            countries={this.props.countries}/>
          <KartItemList kartItems={this.props.product} />
+         <input type="submit"  value="Save" onClick={this.saveCheckoutInformation}  className="btn btn-primary"/> 
+
       </div>
     )
   }
 }
 
 Checkout.propTypes = {  
-  checkout: PropTypes.object.isRequired,
+  checkout: PropTypes.array.isRequired,
+  address: PropTypes.array.isRequired,
   countries: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 }
 
 
 function mapStateToProps(state){  
-  console.log("Inside mapStateToProps method state object: { "+state+" }");
+  console.log("Inside mapStateToProps method : checkout.js");
   
   let formattedDropDown = [];
   if(state.countries && state.countries.length > 0){
@@ -77,17 +96,18 @@ function mapStateToProps(state){
     });
   }
 
-  let address = {};
+  let address = [];
   let product = [];
   if(state.checkout){
     let checkoutItem = state.checkout[0];
     if(checkoutItem){
-      if(checkoutItem.address.length > 0)
-        address = checkoutItem.address[0];
-       product = checkoutItem.product;
+      if(checkoutItem.address)
+        address = checkoutItem.address;
+        if(checkoutItem.product)
+          product = checkoutItem.product;
     }
   }
-  console.log(address);
+  console.log("Address at mapStateToProps: "+address);
   return{    
       address: address, 
       product: product,
@@ -96,7 +116,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToAction(dispatch){
-  console.log("Inside mapDispatchToAction method");
+  console.log("Inside mapDispatchToAction method : checkout.js");
   return{
     actions: bindActionCreators(checkoutAction, dispatch)    
   };

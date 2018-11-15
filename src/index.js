@@ -8,6 +8,7 @@ import {Router, browserHistory} from 'react-router';
 import configureStore from './store/configureStore';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../shared/styles/styles.css';
 import routes from './routes';
 import App from './components/App';
 import {loadCheckout} from './actions/checkoutAction';

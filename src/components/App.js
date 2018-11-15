@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 import Header from '../components/common/Header';
 import {connect} from 'react-redux';
-
 class App extends React.Component{
 
     constructor(state){
@@ -11,7 +10,7 @@ class App extends React.Component{
         return (
             <div className="container">
                 <Header />  
-                {this.props.children}                 
+                {this.props.children}                  
             </div>
         );
     }
