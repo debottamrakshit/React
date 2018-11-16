@@ -1,15 +1,17 @@
 import * as types from './actionTypes';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
+import productApi from '../api/ProductApi';
 
 
-export function loadProductSuccess(courses) {
-  return { type: types.LOAD_PRODUCTS_SUCCESS, courses};
+export function loadProductSuccess(products) {
+  return { type: types.LOAD_PRODUCTS_SUCCESS, products};
 }
 export function loadProducts() {
-  return function(dispatch) {
+  return dispatch => {
     dispatch(beginAjaxCall());
-    return courseApi.getAllCourses().then(courses => {
-      dispatch(loadCoursesSuccess(courses));
+    return productApi.getAllProducts().then(products => {
+      console.log(products);
+      dispatch(loadProductSuccess(products));
     }).catch(error => {
       throw(error);
     });
