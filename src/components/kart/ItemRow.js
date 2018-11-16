@@ -17,7 +17,9 @@ const ItemRow = ({product, lable}) => {
           <p className="card-text">{product.desc}</p>
         </div>
         <div class="card-body">
-          <Link to={'/product' + product.id}>{lable}</Link>          
+          <Link to={'/product' + product.id}>Add To Kart</Link>  
+          |
+          <Link to={'/product' + product.id}>Checkout</Link>          
         </div>
       </div>
     </div>     

@@ -16,8 +16,8 @@ class CheckoutSummary extends React.Component {
   render() {
     return (
       <div>
-          <AddressSummary address={this.props.address} />
-           <KartItemList kartItems={this.props.product}/>     
+          <AddressSummary address={this.state.address} />
+           <KartItemList kartItems={this.state.product}/>     
       </div>
     )
   }
