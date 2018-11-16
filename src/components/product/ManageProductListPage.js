@@ -30,8 +30,6 @@ ManageProductListPage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-    console.log("1");
-    console.log(state);
     return{
         products: state.products
     };

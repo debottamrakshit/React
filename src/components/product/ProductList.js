@@ -9,27 +9,16 @@ class ProductList extends Component {
   }
 
   renderProducts(products){
-    if(products){
+    
       return (
-        <table className="table">
-          <thead>
-          <tr>
-            <th>&nbsp;</th>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>image</th>
-          </tr>
-          </thead>
-          <tbody>
+        <div className="row">
           {products.map(product =>
             <ProductListRow key={product.id} product={product}/>
           )}
-          </tbody>
-        </table>
+          </div>
+
       )
-    }
-    return null;
+    
   }
 
 }
