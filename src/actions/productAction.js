@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
-import productApi from '../api/ProductApi';
+import productApi from '../api/mockProductApi';
 
 
 export function loadProductSuccess(products) {
@@ -10,7 +10,6 @@ export function loadProducts() {
   return dispatch => {
     dispatch(beginAjaxCall());
     return productApi.getAllProducts().then(products => {
-      console.log(products);
       dispatch(loadProductSuccess(products));
     }).catch(error => {
       throw(error);

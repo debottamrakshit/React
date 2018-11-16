@@ -13,11 +13,13 @@ import routes from './routes';
 import App from './components/App';
 import {loadCheckout} from './actions/checkoutAction';
 import {loadCountries} from './actions/countryAction';
+import {loadProducts} from './actions/productAction';
 
 
 const store = configureStore();
 store.dispatch(loadCheckout());
 store.dispatch(loadCountries());
+store.dispatch(loadProducts());
 
 // store.subscribe( () => {
 //     console.log('state\n', store.getState());    

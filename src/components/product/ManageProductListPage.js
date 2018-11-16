@@ -14,11 +14,8 @@ class ManageProductListPage extends React.Component{
     }
     render() {
         const {products} = this.props;
-        console.log(this.state);
-        console.log(products);
         return (
-            this.state == null || this.state.isLoading ? null : <ProductListForm products={products}/>
-                
+            this.state == null || this.state.isLoading ? null : <ProductListForm products={products}/>   
         );
     }
     componentDidMount() {
