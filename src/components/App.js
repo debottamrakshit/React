@@ -1,10 +1,6 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
-//import Main from '../components/kart/Main.js';
-//import '../styles/styles.css';
 import Header from '../components/common/Header';
-import { ManageProductListPage } from './product/ManageProductListPage';
-
 class App extends React.Component{
 
     constructor(props){
@@ -12,23 +8,20 @@ class App extends React.Component{
     }
     render(){
         return (
-            <div className="app">
-                <Header />
-                {this.props.children}
+            <div className="container">
+                <Header />  
+                {this.props.children}                  
             </div>
         );
     }
 }
-
-
-App.propTypes = {
+App.propTypes={
     children: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state, ownProps) {
-    return{
-        loading: true
-    };
+function mapStateToProps(state, ownProps){
+    return {
+        
+        };
 }
-
 export default connect(mapStateToProps)(App);

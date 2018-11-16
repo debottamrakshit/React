@@ -1,19 +1,20 @@
 import React from 'react';
 import {jumbotron} from 'bootstrap';
-import Checkout from './checkout';
+import Checkout from './Checkout';
+
+
 
 
 export default class Main extends React.Component{
     render(){
         return (
             <div className="container">
-                <div className="jumbotron">
-                    This is main page
-                </div>
+                <img src="/shared/images/header.jpg" width="100%" height="10%"/>  
                 <div>
-                        <Checkout />
+                   <Checkout />
                 </div>    
             </div>
         );
     }  
 }
+

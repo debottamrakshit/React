@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-const TextInput = ({name, label, onChange, placeholder, value, error}) => {
+const TextInput = ({name, label, onChange, placeholder, value, error, size}) => {
   let wrapperClass = 'form-group';
   if (error && error.length > 0) {
     wrapperClass += " " + 'has-error';
@@ -8,16 +8,22 @@ const TextInput = ({name, label, onChange, placeholder, value, error}) => {
 
   return (
     <div className={wrapperClass}>
-      <label htmlFor={name}>{label}</label>
-      <div className="field">
-        <input
-          type="text"
-          name={name}
-          className="form-control"
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}/>
-        {error && <div className="alert alert-danger">{error}</div>}
+        <div className="row">
+          <div className="col-sm-2">
+            <label htmlFor={name}>{label}</label>
+          </div>
+          <div className="col-sm-2">
+            <div className="field">
+              <input
+                type="text"
+                name={name}
+                className="form-control-sm"
+                placeholder={placeholder}
+                value={value}
+                onChange={onChange} size={size}/>
+              {error && <div className="alert alert-danger">{error}</div>}
+            </div>
+          </div>
       </div>
     </div>
   );
