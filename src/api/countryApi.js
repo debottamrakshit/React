@@ -252,8 +252,7 @@ class countryApi{
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(Object.assign([], COUNTRY_BY_CODE));
-        },
-            delay);                      
+        },delay);                      
     });
 }
 }

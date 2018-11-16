@@ -7,7 +7,7 @@ import CheckoutSummary from './components/kart/summary/CheckoutSummary';
 
 
 export default (
-    <Route path="/" component={App}>
+    <Route path="/" exact={true} component={App}>
         <Route path="/about" component={AboutPage}/>
         <Route path="/checkout" component={Main}/>
         <Route path="/checkoutSummary" component={CheckoutSummary}/>

@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
+import {Link} from 'react-router';
 
-
-const ItemRow = ({product}) => {
+ 
+const ItemRow = ({product, lable}) => {
   return(
     <div className="col-sm-4">
       <div className="card">
@@ -16,7 +17,7 @@ const ItemRow = ({product}) => {
           <p className="card-text">{product.desc}</p>
         </div>
         <div class="card-body">
-          <a href="#" class="card-link">Remove</a>
+          <Link to={'/product' + product.id}>{lable}</Link>          
         </div>
       </div>
     </div>     
@@ -24,7 +25,9 @@ const ItemRow = ({product}) => {
 }
 
 ItemRow.propTypes = {
-  product: PropTypes.object.isRequired
+  product: PropTypes.object.isRequired,
+  lable: PropTypes.object.isRequired
+
 }
 
 export default ItemRow;

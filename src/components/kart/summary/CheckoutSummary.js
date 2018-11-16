@@ -43,15 +43,16 @@ function mapStateToProps(state){
     let checkoutItem = [];
     if(state.checkout){
         checkoutItem = state.checkout[0];
-        if(checkoutItem.address){
-            address=checkoutItem.address;
-            let countryName = getCountryName(countries, address.country);
-            address.countryName=countryName;
-        }
-        if(checkoutItem.product)
-            product = checkoutItem.product;
+        if(checkoutItem){
+            if(checkoutItem.address){
+                address=checkoutItem.address;
+                let countryName = getCountryName(countries, address.country);
+                address.countryName=countryName;
+            }
+            if(checkoutItem.product)
+                product = checkoutItem.product;
+        }        
     }
-
     return{
         address: address, 
         product: product

@@ -22,7 +22,7 @@ const AddressForm = ({address, onChange, onSave, countries}) => {
             value={address.state}  
             onChange={onChange} size="30" placeholder="State"/>
             
-            <TextInput name="zip" label="Zip/Postal Code" 
+            <TextInput name="zip" label="Zip Code" 
             value={address.zip}  
             onChange={onChange} size="6" placeholder="Zip"/>
             

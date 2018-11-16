@@ -50,7 +50,7 @@ class checkoutApi{
          checkout = Object.assign({}, checkout);
          return new Promise((resolve, reject) => {
              setTimeout(() => {                
-                resolve(checkout);   
+                resolve(Object.assign([], checkout));   
                 //CHECKOUT.push(checkout);                
              }, delay);             
          });

@@ -19,9 +19,9 @@ const store = configureStore();
 store.dispatch(loadCheckout());
 store.dispatch(loadCountries());
 
-store.subscribe( () => {
-    console.log('state\n', store.getState());    
-  });
+// store.subscribe( () => {
+//     console.log('state\n', store.getState());    
+//   });
 
 render(        
     <Provider store={store}>

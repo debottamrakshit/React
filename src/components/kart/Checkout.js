@@ -13,7 +13,8 @@ class Checkout extends React.Component{
     super(props, context);
     this.state = {
       address: Object.assign([], props.address),
-      product: Object.assign([], props.product)
+      product: Object.assign([], props.product),
+      errors: {}
     };
    this.changeDataOnPage=this.changeDataOnPage.bind(this);
    this.saveCheckoutInformation=this.saveCheckoutInformation.bind(this);
@@ -31,8 +32,8 @@ componentDidMount(){
 }
 
   componentWillReceiveProps(newProps){
-    console.log("Inside componentWillReceiveProps method  : checkout.js");
-
+    console.log("Inside componentWillReceiveProps method  : checkout.js "+newProps);
+    //this.setState({checkout: Object.assign([], newProps.checkout)});
   }
 
   changeDataOnPage(event){    
@@ -67,7 +68,8 @@ componentDidMount(){
             onChange={this.changeDataOnPage} 
             onSave={this.saveCheckoutInformation} 
             countries={this.props.countries}/>
-         <KartItemList kartItems={this.props.product} />
+         <KartItemList kartItems={this.props.product} actionLable={"Remove"}/>
+
          <input type="submit"  value="Save" onClick={this.saveCheckoutInformation}  className="btn btn-primary"/> 
 
       </div>
@@ -107,11 +109,10 @@ function mapStateToProps(state){
           product = checkoutItem.product;
     }
   }
-  console.log("Address at mapStateToProps: "+address);
   return{    
-      address: address, 
-      product: product,
-      countries: formattedDropDown
+      address: Object.assign([], address), 
+      product: Object.assign([], product),
+      countries: Object.assign([], formattedDropDown)
     };
 }
 
