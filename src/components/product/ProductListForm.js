@@ -11,12 +11,15 @@ class ProductListForm extends Component {
         const products = this.props.products;
         return (
           <div>
-              <ProductList products={products}/>
+              <ProductList products={products} addToCart={this.props.addToCart}/>
           </div>
         );
     }
+
+
 }
 ProductListForm.propTypes = {
-    products: PropTypes.array.isRequired
+    products: PropTypes.array.isRequired,
+    addToCart: PropTypes.func.isRequired
   };
 export default ProductListForm;
