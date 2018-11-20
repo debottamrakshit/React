@@ -118,6 +118,11 @@ class checkoutApi{
                         }
 
                     }
+
+                    if(!checkout.product || checkout.product.length == 0) {
+                        reject("No Item to checkout")
+                    }
+
                 }
                 resolve(Object.assign([], checkout));   
                 //CHECKOUT.push(checkout);                
