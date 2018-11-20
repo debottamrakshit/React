@@ -49,11 +49,31 @@ class checkoutApi{
     static saveCheckoutInfo(checkout){
          checkout = Object.assign({}, checkout);
          return new Promise((resolve, reject) => {
-             setTimeout(() => {                
+             setTimeout(() => { 
+                if(checkout){
+                    if(checkout.address.length == 0){
+                        reject("No Address is mention in checkout page");
+                    }else{
+                        let addressValidated = checkout.address[0]
+                        const minAddressLine = 1;
+                        if(addressValidated.line1.length < minAddressLine){
+                            reject('Line1 must be greater than ${minAddressLine} chars');
+                        }
+                    }
+                }
                 resolve(Object.assign([], checkout));   
                 //CHECKOUT.push(checkout);                
              }, delay);             
          });
+    }
+
+    static removeProduct(checkoutSubmit){
+       
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(Object.assign([], checkoutSubmit));
+            }, delay);
+        });
     }
 } 
 

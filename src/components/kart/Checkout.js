@@ -18,6 +18,7 @@ class Checkout extends React.Component{
     };
    this.changeDataOnPage=this.changeDataOnPage.bind(this);
    this.saveCheckoutInformation=this.saveCheckoutInformation.bind(this);
+   this.productToRemove=this.productToRemove.bind(this);
   }
 
 //This method execute before render DOM
@@ -33,7 +34,7 @@ componentDidMount(){
 
   componentWillReceiveProps(newProps){
     console.log("Inside componentWillReceiveProps method  : checkout.js "+newProps);
-    //this.setState({checkout: Object.assign([], newProps.checkout)});
+    //this.setState({product: Object.assign([], newProps.product)});
   }
 
   changeDataOnPage(event){    
@@ -46,9 +47,8 @@ componentDidMount(){
   saveCheckoutInformation(event){
     console.log("Inside saveCheckoutInformation method event Handler state object: { "+this.state+" }");
     event.preventDefault();
+    let checkoutSubmit = [];
 
-    let checkoutSubmit = []; 
-    
     checkoutSubmit.address=this.state.address;
     checkoutSubmit.product=this.state.product;   
     
@@ -58,18 +58,46 @@ componentDidMount(){
   redirect(){
     browserHistory.push("/checkoutSummary");
   }
+  redirectOnCheckout(){
+    browserHistory.push("/checkout");
+  }
 
-  render() {
-    console.log(this.props);
+  productToRemove(productId){
+    let products = this.state.product;
+    let finalProducts = this.state.product;
+    if(productId){
+      let productIdToRemove = products.filter(product => {return product.id == productId});
+      if(productIdToRemove){
+         for(var item=0; item < products.length; item++){
+            if(products[item].id == productIdToRemove[0].id){
+              finalProducts.splice(item, 1);
+            }
+         } 
+        let checkoutSubmit = [];
+        checkoutSubmit.address = this.state.address;
+        if(finalProducts)
+          checkoutSubmit.product = Object.assign([], finalProducts);
+        else checkoutSubmit.product = [];
+        this.props.actions.removeItem(checkoutSubmit).then(() => this.redirectOnCheckout());
+      }else console.log("No Item to remove");
+      
+    }
+  }
+
+  removeProductFromKart(event){
+    console("Inside removeProductFromKart method of : checkout.js");
+    
+  }
+
+  render() {    
     return (
       <div>
-         <p>This is checkout page</p>
+         <p>CHECKOUT PAGE</p>
          <AddressForm address={this.state.address} 
             onChange={this.changeDataOnPage.bind(this)} 
             onSave={this.saveCheckoutInformation} 
-            countries={this.props.countries}/>
-         <KartItemList kartItems={this.state.product} actionLable={"Remove"}/>
-
+            countries={this.props.countries}  errors={this.state.errors}/>
+         <KartItemList kartItems={this.state.product} onClick={this.productToRemove}/>
          <input type="submit"  value="Save" onClick={this.saveCheckoutInformation}  className="btn btn-primary"/> 
 
       </div>
@@ -78,16 +106,16 @@ componentDidMount(){
 }
 
 Checkout.propTypes = {  
-  checkout: PropTypes.array.isRequired,
+  //checkout: PropTypes.array.isRequired,
   address: PropTypes.array.isRequired,
   countries: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 }
 
 
-function mapStateToProps(state){  
+
+function mapStateToProps(state, ownProps){  
   console.log("Inside mapStateToProps method : checkout.js");
-  
   let formattedDropDown = [];
   if(state.countries && state.countries.length > 0){
     formattedDropDown = state.countries.map(country =>{
@@ -109,11 +137,18 @@ function mapStateToProps(state){
           product = checkoutItem.product;
     }
   }
+
+  if(ownProps.params){
+    var productId = ownProps.params.productId;
+    console.log("Product Id to remove: "+productId);
+    
+
+  }
+
   return{    
       address: Object.assign([], address), 
       product: Object.assign([], product),
-      countries: Object.assign([], formattedDropDown),
-      productProps: Object.assign([], product)
+      countries: Object.assign([], formattedDropDown)
     };
 }
 

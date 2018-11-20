@@ -9,6 +9,11 @@ export function saveCheckoutDetailsSuccess(checkout){
     return {type: TYPES.SAVE_CHECKOUT_SUCCESS, checkout};
 }
 
+export function removeProductFromKart(checkout){
+    return {type: TYPES.REMOVE_PRODUCT_FROM_CHECKOUT_SUCCESS, checkout};
+}
+
+
 export function loadCheckout(){  
     return function(dispatch){        
         return checkoutApi.getCheckoutInfo().then(apiCheckout => {
@@ -24,6 +29,17 @@ export function saveCheckout(checkout){
         return checkoutApi.saveCheckoutInfo(checkout).then(checkout => {
                return dispatch(saveCheckoutDetailsSuccess(checkout)); 
         }).catch(error =>{
+            throw(error);
+        });
+    }
+}
+
+
+export function removeItem(checkout){
+    return function(dispatch){
+        return checkoutApi.removeProduct(checkout).then(checkout => {
+            return dispatch(removeProductFromKart(checkout))
+        }).catch(error => {
             throw(error);
         });
     }

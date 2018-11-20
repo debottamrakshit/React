@@ -5,6 +5,7 @@ import Main from './components/kart/Main';
 import AboutPage from './components/about/AboutPage';
 import ManageProductListPage from './components/product/ManageProductListPage';
 import CheckoutSummary from './components/kart/summary/CheckoutSummary';
+import Checkout from './components/kart/Checkout';
 
 export default (
     <Route path="/" exact={true} component={App}>
@@ -12,5 +13,6 @@ export default (
         <Route path="/about" component={AboutPage}/>
         <Route path="/checkout" component={Main}/>
         <Route path="/checkoutSummary" component={CheckoutSummary}/>
+        <Route path="/checkout/:productId" component={Checkout} />
     </Route>
 );
