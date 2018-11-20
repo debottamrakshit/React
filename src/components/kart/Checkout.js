@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux';
 import * as checkoutAction from '../../actions/checkoutAction';
 import KartItemList from './KartItemList';
 import {browserHistory} from 'react-router';
+import toastr from 'toastr';
 
 class Checkout extends React.Component{
 
@@ -34,7 +35,18 @@ componentDidMount(){
 
   componentWillReceiveProps(newProps){
     console.log("Inside componentWillReceiveProps method  : checkout.js "+newProps);
-    //this.setState({product: Object.assign([], newProps.product)});
+    let product = [];
+    if(this.props.product){
+      product = this.props.product;
+      //if(this.product.length != )
+    }
+
+    let newProducts = [];
+    if(newProps.product){
+      newProducts = newProps.product;
+    }
+    if(product.length != newProducts.length)
+      this.setState({product: Object.assign([], newProducts)});
   }
 
   changeDataOnPage(event){    
@@ -52,7 +64,9 @@ componentDidMount(){
     checkoutSubmit.address=this.state.address;
     checkoutSubmit.product=this.state.product;   
     
-    this.props.actions.saveCheckout(checkoutSubmit).then(() => this.redirect());
+    this.props.actions.saveCheckout(checkoutSubmit).
+    then(() => this.redirect()).
+    catch(error => toastr.error(error));
   }
 
   redirect(){
@@ -74,7 +88,7 @@ componentDidMount(){
             }
          } 
         let checkoutSubmit = [];
-        checkoutSubmit.address = this.state.address;
+        checkoutSubmit.address = Object.assign([], this.state.address);
         if(finalProducts)
           checkoutSubmit.product = Object.assign([], finalProducts);
         else checkoutSubmit.product = [];
@@ -84,21 +98,19 @@ componentDidMount(){
     }
   }
 
-  removeProductFromKart(event){
-    console("Inside removeProductFromKart method of : checkout.js");
-    
-  }
-
   render() {    
     return (
-      <div>
+      <div className="container">
          <p>CHECKOUT PAGE</p>
          <AddressForm address={this.state.address} 
             onChange={this.changeDataOnPage.bind(this)} 
             onSave={this.saveCheckoutInformation} 
             countries={this.props.countries}  errors={this.state.errors}/>
          <KartItemList kartItems={this.state.product} onClick={this.productToRemove}/>
-         <input type="submit"  value="Save" onClick={this.saveCheckoutInformation}  className="btn btn-primary"/> 
+         <div className="d-flex justify-content-between align-items-center">
+            <input type="submit" value="Save" onClick={this.saveCheckoutInformation}  className="btn btn-primary"/> 
+         </div>
+         
 
       </div>
     )
