@@ -4,35 +4,28 @@ import ProductListRow from './ProductListRow';
 class ProductList extends Component {
   render(){
     let products = this.props.products;
-    let renderProduct = this.renderProducts(products);
+    let addToCart = this.props.addToCart;
+    let renderProduct = this.renderProducts(products, addToCart);
     return renderProduct;
   }
 
-  renderProducts(products){
-    if(products){
+  renderProducts(products, addToCart){
+    
       return (
-        <table className="table">
-          <thead>
-          <tr>
-            <th>&nbsp;</th>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>image</th>
-          </tr>
-          </thead>
-          <tbody>
-          {products.map(product =>
-            <ProductListRow key={product.id} product={product}/>
+        <div className="row">
+          {products.map((product, i) =>
+            <ProductListRow index={i} product={product} addToCart={addToCart}/>
           )}
-          </tbody>
-        </table>
+          </div>
+
       )
-    }
-    return null;
+    
   }
 
 }
-
+ProductList.propTypes = {
+  products: PropTypes.array.isRequired,
+  addToCart: PropTypes.func.isRequired
+};
 
 export default ProductList;

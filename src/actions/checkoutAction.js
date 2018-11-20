@@ -1,5 +1,5 @@
 import checkoutApi from '../api/checkoutApi';
-import * as TYPES from '../actions/actionTypes'
+import * as TYPES from '../actions/actionTypes';
 
 export function loadCheckoutActionSuccess(apiCheckout){
     return {type: TYPES.LOAD_CHECKOUT_SUCCESS, apiCheckout};
@@ -23,6 +23,13 @@ export function loadCheckout(){
         });
     };
 }
+
+export function addToCheckout(index, product){  
+    return {type: TYPES.ADD_TO_CHECKOUT_SUCCESS, product };
+}
+
+
+//export const addToCheckout = product => ({type: TYPES.ADD_TO_CHECKOUT_SUCCESS, payload: product});
 
 export function saveCheckout(checkout){
     return function(dispatch){
