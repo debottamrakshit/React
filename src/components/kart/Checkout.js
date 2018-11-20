@@ -12,7 +12,7 @@ class Checkout extends React.Component{
   constructor(props, context){
     super(props, context);
     this.state = {
-      address: Object.assign([], props.address),
+      address: [],
       product: Object.assign([], props.product),
       errors: {}
     };
@@ -37,7 +37,6 @@ componentDidMount(){
   }
 
   changeDataOnPage(event){    
-    console.log("Inside changeDataOnPage method event Handler  state object: { "+event.target.name+" }");
     const field = event.target.name;     
     let address = this.state.address;    
     address[field] = event.target.value;
@@ -61,14 +60,15 @@ componentDidMount(){
   }
 
   render() {
+    console.log(this.props);
     return (
       <div>
          <p>This is checkout page</p>
-         <AddressForm address={this.props.address} 
-            onChange={this.changeDataOnPage} 
+         <AddressForm address={this.state.address} 
+            onChange={this.changeDataOnPage.bind(this)} 
             onSave={this.saveCheckoutInformation} 
             countries={this.props.countries}/>
-         <KartItemList kartItems={this.props.product} actionLable={"Remove"}/>
+         <KartItemList kartItems={this.state.product} actionLable={"Remove"}/>
 
          <input type="submit"  value="Save" onClick={this.saveCheckoutInformation}  className="btn btn-primary"/> 
 
@@ -112,7 +112,8 @@ function mapStateToProps(state){
   return{    
       address: Object.assign([], address), 
       product: Object.assign([], product),
-      countries: Object.assign([], formattedDropDown)
+      countries: Object.assign([], formattedDropDown),
+      productProps: Object.assign([], product)
     };
 }
 
