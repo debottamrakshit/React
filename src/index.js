@@ -14,6 +14,7 @@ import App from './components/App';
 import {loadCheckout} from './actions/checkoutAction';
 import {loadCountries} from './actions/countryAction';
 import {loadProducts} from './actions/productAction';
+import '../node_modules/toastr/build/toastr.min.css';
 
 
 const store = configureStore();
@@ -21,9 +22,9 @@ store.dispatch(loadCheckout());
 store.dispatch(loadCountries());
 store.dispatch(loadProducts());
 
-// store.subscribe( () => {
-//     console.log('state\n', store.getState());    
-//   });
+ store.subscribe( () => {
+     console.log('state\n', store.getState());    
+   });
 
 render(        
     <Provider store={store}>

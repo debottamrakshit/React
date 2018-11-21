@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux';
 import * as checkoutAction from '../../actions/checkoutAction';
 import KartItemList from './KartItemList';
 import {browserHistory} from 'react-router';
+import toastr from 'toastr';
 
 class Checkout extends React.Component{
 
@@ -18,6 +19,7 @@ class Checkout extends React.Component{
     };
    this.changeDataOnPage=this.changeDataOnPage.bind(this);
    this.saveCheckoutInformation=this.saveCheckoutInformation.bind(this);
+   this.productToRemove=this.productToRemove.bind(this);
   }
 
 //This method execute before render DOM
@@ -33,7 +35,18 @@ componentDidMount(){
 
   componentWillReceiveProps(newProps){
     console.log("Inside componentWillReceiveProps method  : checkout.js "+newProps);
-    //this.setState({checkout: Object.assign([], newProps.checkout)});
+    let product = [];
+    if(this.props.product){
+      product = this.props.product;
+      //if(this.product.length != )
+    }
+
+    let newProducts = [];
+    if(newProps.product){
+      newProducts = newProps.product;
+    }
+    if(product.length != newProducts.length)
+      this.setState({product: Object.assign([], newProducts)});
   }
 
   changeDataOnPage(event){    
@@ -46,31 +59,58 @@ componentDidMount(){
   saveCheckoutInformation(event){
     console.log("Inside saveCheckoutInformation method event Handler state object: { "+this.state+" }");
     event.preventDefault();
+    let checkoutSubmit = [];
 
-    let checkoutSubmit = []; 
-    
     checkoutSubmit.address=this.state.address;
     checkoutSubmit.product=this.state.product;   
     
-    this.props.actions.saveCheckout(checkoutSubmit).then(() => this.redirect());
+    this.props.actions.saveCheckout(checkoutSubmit).
+    then(() => this.redirect()).
+    catch(error => toastr.error(error));
   }
 
   redirect(){
     browserHistory.push("/checkoutSummary");
   }
+  redirectOnCheckout(){
+    browserHistory.push("/checkout");
+  }
 
-  render() {
-    console.log(this.props);
+  productToRemove(productId){
+    let products = this.state.product;
+    let finalProducts = this.state.product;
+    if(productId){
+      let productIdToRemove = products.filter(product => {return product.id == productId});
+      if(productIdToRemove){
+         for(var item=0; item < products.length; item++){
+            if(products[item].id == productIdToRemove[0].id){
+              finalProducts.splice(item, 1);
+            }
+         } 
+        let checkoutSubmit = [];
+        checkoutSubmit.address = Object.assign([], this.state.address);
+        if(finalProducts)
+          checkoutSubmit.product = Object.assign([], finalProducts);
+        else checkoutSubmit.product = [];
+        this.props.actions.removeItem(checkoutSubmit).then(() => this.redirectOnCheckout());
+      }else console.log("No Item to remove");
+      
+    }
+  }
+
+  render() {    
     return (
-      <div>
-         <p>This is checkout page</p>
+      <div className="container">
+         <p>CHECKOUT PAGE</p>
          <AddressForm address={this.state.address} 
             onChange={this.changeDataOnPage.bind(this)} 
             onSave={this.saveCheckoutInformation} 
-            countries={this.props.countries}/>
-         <KartItemList kartItems={this.state.product} actionLable={"Remove"}/>
-
-         <input type="submit"  value="Save" onClick={this.saveCheckoutInformation}  className="btn btn-primary"/> 
+            countries={this.props.countries}  errors={this.state.errors}/>
+         <KartItemList kartItems={this.state.product} onClick={this.productToRemove}/>
+         <div className="d-flex justify-content-between align-items-center">
+            <input type="submit" value="Save" onClick={this.saveCheckoutInformation}  className="btn btn-primary"/> 
+         </div>
+         
 
       </div>
     )
@@ -78,16 +118,16 @@ componentDidMount(){
 }
 
 Checkout.propTypes = {  
-  checkout: PropTypes.array.isRequired,
+  //checkout: PropTypes.array.isRequired,
   address: PropTypes.array.isRequired,
   countries: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 }
 
 
-function mapStateToProps(state){  
+
+function mapStateToProps(state, ownProps){  
   console.log("Inside mapStateToProps method : checkout.js");
-  
   let formattedDropDown = [];
   if(state.countries && state.countries.length > 0){
     formattedDropDown = state.countries.map(country =>{
@@ -109,11 +149,18 @@ function mapStateToProps(state){
           product = checkoutItem.product;
     }
   }
+
+  if(ownProps.params){
+    var productId = ownProps.params.productId;
+    console.log("Product Id to remove: "+productId);
+    
+
+  }
+
   return{    
       address: Object.assign([], address), 
       product: Object.assign([], product),
-      countries: Object.assign([], formattedDropDown),
-      productProps: Object.assign([], product)
+      countries: Object.assign([], formattedDropDown)
     };
 }
 

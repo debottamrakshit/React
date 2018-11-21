@@ -1,13 +1,13 @@
 import React, {PropTypes} from 'react';
 import ItemRow from './ItemRow';
 
-const KartItemList = ({kartItems, actionLabel}) => {
+const KartItemList = ({kartItems, onClick}) => {
     return(
         <div className="container">
             <div className="row">
                 {kartItems.map(item =>
-                       <ItemRow product={item} lable={actionLabel} /> 
-                )};              
+                       <ItemRow key={item.id} product={item} onClick={onClick}/> 
+                )}            
             </div>
         </div> 
 
@@ -16,7 +16,7 @@ const KartItemList = ({kartItems, actionLabel}) => {
 
 KartItemList.propTypes = {
     kartItems: PropTypes.array.isRequired,
-    actionLabel:PropTypes.object.isRequired
+    onClick: PropTypes.object.isRequired
 };
 
 export default KartItemList;
