@@ -8,7 +8,7 @@ const KartItemList = ({kartItems, onClick}) => {
                 {kartItems.map(item =>
                        <ItemRow key={item.id} product={item} onClick={onClick}/> 
                 )}            
-            </div>
+            </div>            
         </div> 
 
     ); 

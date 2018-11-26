@@ -7,6 +7,7 @@ import * as checkoutAction from '../../actions/checkoutAction';
 import KartItemList from './KartItemList';
 import {browserHistory} from 'react-router';
 import toastr from 'toastr';
+import PaymentOption from './PaymentOption';
 
 class Checkout extends React.Component{
 
@@ -15,11 +16,15 @@ class Checkout extends React.Component{
     this.state = {
       address: [],
       product: Object.assign([], props.product),
-      errors: {}
+      errors: {},
+      paymentOptions: Object.assign([], props.paymentOptionProps),
+      paymentType : {}, 
+      totalCheckoutAmount: props.totalProductCost
     };
    this.changeDataOnPage=this.changeDataOnPage.bind(this);
    this.saveCheckoutInformation=this.saveCheckoutInformation.bind(this);
    this.productToRemove=this.productToRemove.bind(this);
+   this.selectPaymentTypes=this.selectPaymentTypes.bind(this);
   }
 
 //This method execute before render DOM
@@ -47,6 +52,19 @@ componentDidMount(){
     }
     if(product.length != newProducts.length)
       this.setState({product: Object.assign([], newProducts)});
+
+    if(this.props.totalProductCost != newProps.totalProductCost){
+      this.setState({totalCheckoutAmount: newProps.totalProductCost});
+    }
+
+  }
+
+
+  selectPaymentTypes(event){
+    const field = event.target.name;
+    let paymentType = this.state.paymentType;
+    paymentType = event.target.value;
+    return this.setState({paymentType: paymentType});
   }
 
   changeDataOnPage(event){    
@@ -92,6 +110,8 @@ componentDidMount(){
         if(finalProducts)
           checkoutSubmit.product = Object.assign([], finalProducts);
         else checkoutSubmit.product = [];
+        var newProductCost = getTotalProductPrice(finalProducts);
+        this.setState({totalCheckoutAmount: newProductCost});
         this.props.actions.removeItem(checkoutSubmit).then(() => this.redirectOnCheckout());
       }else console.log("No Item to remove");
       
@@ -101,17 +121,20 @@ componentDidMount(){
   render() {    
     return (
       <div className="container">
-         <p>CHECKOUT PAGE</p>
-         <AddressForm address={this.state.address} 
+         <h1 className="bg-success">CHECKOUT PAGE</h1>
+         <h2 className="bg-info lead text-center">Payment Options ....</h2>
+          <PaymentOption options={this.state.paymentOptions} value={this.state.paymentType}  onChange={this.selectPaymentTypes} totalCost={this.state.totalCheckoutAmount}/>
+          <h2 className="bg-info lead text-center">Address ....</h2>
+          <AddressForm address={this.state.address} 
             onChange={this.changeDataOnPage.bind(this)} 
             onSave={this.saveCheckoutInformation} 
             countries={this.props.countries}  errors={this.state.errors}/>
-         <KartItemList kartItems={this.state.product} onClick={this.productToRemove}/>
+         <h2 className="bg-info lead text-center">product ....</h2>
+         <KartItemList kartItems={this.state.product} onClick={this.productToRemove} />
+
          <div className="d-flex justify-content-between align-items-center">
             <input type="submit" value="Save" onClick={this.saveCheckoutInformation}  className="btn btn-primary"/> 
          </div>
-         
-
       </div>
     )
   }
@@ -121,10 +144,25 @@ Checkout.propTypes = {
   //checkout: PropTypes.array.isRequired,
   address: PropTypes.array.isRequired,
   countries: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  paymentOptions: PropTypes.array.isRequired,
+  paymentType: PropTypes.object.isRequired,
+  totalCheckoutAmount:PropTypes.number.isRequired
 }
 
+function getTotalProductPrice(products){
+  var returnValue = 0.00;
+  if(products){
+    for(var index = 0; index<products.length; index++){
+      var  priceText=products[index].price+"";    
+      let priceTest = priceText.replace(",", "").replace("INR", "");
+      returnValue=returnValue+parseFloat(priceTest);
+    }
+    //returnValue = parseFloat(priceTest);
+  } 
 
+  return returnValue;
+}
 
 function mapStateToProps(state, ownProps){  
   console.log("Inside mapStateToProps method : checkout.js");
@@ -138,6 +176,10 @@ function mapStateToProps(state, ownProps){
     });
   }
 
+  let paymentDropDown = [{"text":"Cash On Delivery", "value":"COD" }];
+  let totalProductCost = 0.00;
+
+
   let address = [];
   let product = [];
   if(state.checkout){
@@ -145,22 +187,21 @@ function mapStateToProps(state, ownProps){
     if(checkoutItem){
       if(checkoutItem.address)
         address = checkoutItem.address;
-        if(checkoutItem.product)
-          product = checkoutItem.product;
+        if(checkoutItem.product){
+          product = checkoutItem.product;  
+          totalProductCost = getTotalProductPrice(product);        
+        }
+
     }
   }
-
-  if(ownProps.params){
-    var productId = ownProps.params.productId;
-    console.log("Product Id to remove: "+productId);
-    
-
-  }
-
+  console.log("Total Product Cost: "+totalProductCost);
+ 
   return{    
       address: Object.assign([], address), 
       product: Object.assign([], product),
-      countries: Object.assign([], formattedDropDown)
+      countries: Object.assign([], formattedDropDown),
+      paymentOptionProps: paymentDropDown,
+      totalProductCost:totalProductCost
     };
 }
 

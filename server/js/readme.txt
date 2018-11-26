@@ -1,0 +1,1 @@
+Get ALL Products: localhost:3000/getAllProducts
