@@ -5,21 +5,21 @@ import * as productActions from '../../actions/productAction';
 import * as checkoutActions from '../../actions/checkoutAction';
 import ProductItemList from './ProductItemList';
 import KartInfo from './KartInfo';
-
+import {browserHistory} from 'react-router';
 
 class ManageProductListPage extends React.Component {
 
     constructor(props) {
         super(props);
         this.addToCart = this.addToCart.bind(this);
-
+        this.productCheckout = this.productCheckout.bind(this);
     }
     render() {
         const { products, kartItems } = this.props;
         return (
             <div>
                 <KartInfo kartItems={kartItems}/>
-                <ProductItemList productItems={products} addToCart={this.addToCart} />
+                <ProductItemList productItems={products} addToCart={this.addToCart} productCheckout={this.productCheckout}/>
             </div>
 
         );
@@ -27,6 +27,10 @@ class ManageProductListPage extends React.Component {
 
     addToCart(event, index, product) {
             this.props.checkoutActions.addToCheckout(index, product);
+    }
+    productCheckout(event, index, product) {
+        this.addToCart(event, index, product);
+        browserHistory.push('/checkout');
     }
 
 }

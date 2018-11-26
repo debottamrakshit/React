@@ -2,12 +2,12 @@ import React, {PropTypes} from 'react';
 import ProductItemRow from './ProductItemRow';
 
 
-const ProductItemList = ({productItems, addToCart}) => {
+const ProductItemList = ({productItems, addToCart, productCheckout}) => {
     return(
         <div className="container">
             <div className="row">
                 {productItems.map((item, i) =>
-                       <ProductItemRow index={i} product={item} addToCart={addToCart} /> 
+                       <ProductItemRow index={i} product={item} addToCart={addToCart} productCheckout={productCheckout}/> 
                 )};              
             </div>
         </div> 
@@ -17,7 +17,8 @@ const ProductItemList = ({productItems, addToCart}) => {
 
 ProductItemList.propTypes = {
     productItems: PropTypes.array.isRequired,
-    addToCart:PropTypes.func.isRequired
+    addToCart: PropTypes.func.isRequired,
+    productCheckout: PropTypes.func.isRequired
 };
 
 export default ProductItemList;
