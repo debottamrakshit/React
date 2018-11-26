@@ -26,16 +26,7 @@ class ManageProductListPage extends React.Component {
     }
 
     addToCart(event, index, product) {
-        console.log(this);
-        console.log(index);
-        console.log(product);
-
-        let addtoCheckoutObj = [];
-
-        addtoCheckoutObj.product = index;
-
-        this.props.checkoutActions.addToCheckout(index, product);
-
+            this.props.checkoutActions.addToCheckout(index, product);
     }
 
 }

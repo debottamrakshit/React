@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 
 var conn = mysql.createConnection({
-  host: "192.168.17.129",
+  host: "localhost",
   user: "root",
   password: "",
   database: "shopping_cart"
