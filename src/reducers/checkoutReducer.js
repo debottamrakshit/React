@@ -37,7 +37,7 @@ export default function checkoutReducer(state = INITIAL_STATE.checkout, action) 
                 } else {
                     duplicateState[0].product = state[0].product.map(item => {
                         if (item.id === action.product.id) {
-                            return Object.assign({}, item, { count: item.count + 1 });
+                            return Object.assign({}, item, { count: item.count + 1, price: (item.count + 1) * item.price });
                         }
                         return item;
                     });
