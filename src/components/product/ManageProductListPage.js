@@ -13,18 +13,30 @@ class ManageProductListPage extends React.Component {
         super(props);
         this.addToCart = this.addToCart.bind(this);
         this.productCheckout = this.productCheckout.bind(this);
+        this.getCartCount = this.getCartCount.bind(this);
     }
     render() {
         const { products, kartItems } = this.props;
         return (
             <div>
-                <KartInfo kartItems={kartItems}/>
+                <KartInfo count={this.getCartCount(kartItems)}/>
                 <ProductItemList productItems={products} addToCart={this.addToCart} productCheckout={this.productCheckout}/>
             </div>
 
         );
     }
 
+    getCartCount(kartItems){
+        let count = 0;
+        if(kartItems !== null){
+            count = kartItems.reduce((acc, currValue, currIndex, array) => {
+                acc = currValue.count + acc;
+                return acc;
+            }, 0);
+        }
+        return count;
+
+    }
     addToCart(event, index, product) {
             this.props.checkoutActions.addToCheckout(index, product);
     }
