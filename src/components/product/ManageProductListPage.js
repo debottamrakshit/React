@@ -5,37 +5,44 @@ import * as productActions from '../../actions/productAction';
 import * as checkoutActions from '../../actions/checkoutAction';
 import ProductItemList from './ProductItemList';
 import KartInfo from './KartInfo';
-
+import {browserHistory} from 'react-router';
 
 class ManageProductListPage extends React.Component {
 
     constructor(props) {
         super(props);
         this.addToCart = this.addToCart.bind(this);
-
+        this.productCheckout = this.productCheckout.bind(this);
+        this.getCartCount = this.getCartCount.bind(this);
     }
     render() {
         const { products, kartItems } = this.props;
         return (
             <div>
-                <KartInfo kartItems={kartItems}/>
-                <ProductItemList productItems={products} addToCart={this.addToCart} />
+                <KartInfo count={this.getCartCount(kartItems)}/>
+                <ProductItemList productItems={products} addToCart={this.addToCart} productCheckout={this.productCheckout}/>
             </div>
 
         );
     }
 
+    getCartCount(kartItems){
+        let count = 0;
+        if(kartItems !== null){
+            count = kartItems.reduce((acc, currValue, currIndex, array) => {
+                acc = currValue.count + acc;
+                return acc;
+            }, 0);
+        }
+        return count;
+
+    }
     addToCart(event, index, product) {
-        console.log(this);
-        console.log(index);
-        console.log(product);
-
-        let addtoCheckoutObj = [];
-
-        addtoCheckoutObj.product = index;
-
-        this.props.checkoutActions.addToCheckout(index, product);
-
+            this.props.checkoutActions.addToCheckout(index, product);
+    }
+    productCheckout(event, index, product) {
+        this.addToCart(event, index, product);
+        browserHistory.push('/checkout');
     }
 
 }

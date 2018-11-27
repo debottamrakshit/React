@@ -9,14 +9,14 @@ const products = [
       img:"/shared/images/iphone6s.1.jfif",
       name:"Apple iPhone 6 (Gold, 1GB RAM, 32GB Storage)",
       desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
-      price:"22,450.00 INR"
+      price:22450.00
    },
    {  
       id:"prd002",
       img:"/shared/images/iphone6s.jfif",
       name:"Apple iPhone 6 (Space Grey, 1GB RAM, 32GB Storage)",
       desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
-      price:"22,450.00 INR"
+      price:22450.00
    }
    ,
    {  
@@ -24,27 +24,27 @@ const products = [
       img:"/shared/images/iphone6s.jfif",
       name:"Apple iPhone 6 (Space Grey, 1GB RAM, 32GB Storage)",
       desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
-      price:"22,450.00 INR"
+      price:22450.00
    },
    {  
       id:"prd004",
       img:"/shared/images/iphone6s.jfif",
       name:"Apple iPhone 6 (Space Grey, 1GB RAM, 32GB Storage)",
       desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
-      price:"22,450.00 INR"
+      price:22450.00
    },
    {  
       id:"prd005",
       img:"/shared/images/iphone6s.jfif",
       name:"Apple iPhone 6 (Space Grey, 1GB RAM, 32GB Storage)",
       desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
-      price:"22,450.00 INR"
+      price: 22450.00
    },{  
       id:"prd006",
       img:"/shared/images/iphone6s.1.jfif",
       name:"Apple iPhone 6 (Gold, 1GB RAM, 32GB Storage)",
       desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
-      price:"22,450.00 INR"
+      price:22450.00
    }
 ];
 

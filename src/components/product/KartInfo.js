@@ -1,11 +1,11 @@
 import React, {PropTypes} from 'react';
 
 
-const KartInfo = ({kartItems}) => {
+const KartInfo = ({count}) => {
     return(
         <div className="container">
             <div className="row">
-                <p>{kartItems.length}</p>
+                <p>{count}</p>
             </div>
         </div> 
 
@@ -13,7 +13,7 @@ const KartInfo = ({kartItems}) => {
 };
 
 KartInfo.propTypes = {
-    kartItems: PropTypes.array.isRequired
+    count: PropTypes.array.isRequired
 };
 
 export default KartInfo;
