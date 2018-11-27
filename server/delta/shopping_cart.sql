@@ -337,8 +337,8 @@ CREATE TABLE IF NOT EXISTS `products` (
 -- Dumping data for table shopping_cart.products: ~2 rows (approximately)
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`) VALUES
-	(1, 'Honor 8X', 'Get Guaranteed Exchange Price of ₹ 6,000 if you exchange in 6-8 months and ₹ 5,200 in 9-12 months', 50, 'img1'),
-	(2, 'All-new Echo Dot (3rd Gen) - Smart speaker with Alexa (Black)', 'Echo Dot is our most popular voice-controlled speaker, now with an improved sound and a new design.', 70, 'img2');
+	(1, 'Honor 8X', 'Get Guaranteed Exchange Price of ₹ 6,000 if you exchange in 6-8 months and ₹ 5,200 in 9-12 months', 50, '/shared/images/iphone6s.jfif'),
+	(2, 'All-new Echo Dot (3rd Gen) - Smart speaker with Alexa (Black)', 'Echo Dot is our most popular voice-controlled speaker, now with an improved sound and a new design.', 70, '/shared/images/iphone6s.1.jfif');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 
 -- Dumping structure for table shopping_cart.shipping_details
