@@ -72,7 +72,7 @@ componentDidMount(){
   changeDataOnPage(event){    
     const field = event.target.name;     
     let address = this.state.address;    
-    address[field] = event.target.value;
+    address[field] = event.target.value.toUpperCase();
     return this.setState({address:address});
   }
 

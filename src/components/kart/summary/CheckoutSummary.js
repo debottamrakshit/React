@@ -36,7 +36,7 @@ class CheckoutSummary extends React.Component {
                     
                 </div>
                 <div className="col-sm-3">         
-                    {this.state.payment.type}
+                    {this.state.payment.type == "COD" ? "Cash On Delivery": ""}
                 </div>
             </div>
             <div className="row">
@@ -100,7 +100,14 @@ function mapStateToProps(state){
     let payment = {};
     let checkoutItem = [];
     if(state.checkout){
-        checkoutItem = state.checkout[0];
+
+        let checkoutState = state.checkout;
+        let index = 0;
+        if(checkoutState && checkoutState.length > 0){
+            //fetch the last one
+            index = (checkoutState.length -1)
+        }
+        checkoutItem = state.checkout[index];
         if(checkoutItem){
             if(checkoutItem.address){
                 address=checkoutItem.address;

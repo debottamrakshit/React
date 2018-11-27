@@ -60,7 +60,8 @@ const CHECKOUT = [
        ],
        "payment":[  
           {  
-             "type":"COD"
+             "type":"COD", 
+             "totalCost":"1000.12"
           }
        ]
     }
@@ -103,7 +104,7 @@ class checkoutApi{
                         }else{
                             if(addressValidated.city.length < minAddressLine){
                                 reject('City must be greater than ${minAddressLine} chars');
-                            }
+                            }                            
                         }
 
                         if(!addressValidated.state ){
@@ -111,6 +112,14 @@ class checkoutApi{
                         }else{
                             if(addressValidated.state.length < minAddressLine || addressValidated.state.length > 2 ){
                                 reject('State must be equals to 2');
+                            }
+                        }
+                        if(!addressValidated.zip ){
+                            reject('Zip is required');
+                        }else{
+                            var numbers = /^[0-9]+$/; 
+                            if(!addressValidated.zip.match(numbers)){
+                                reject('Zip Code must be Numeric');
                             }
                         }
 
