@@ -8,7 +8,7 @@ const ItemRow = ({product, onClick, operation}) => {
   return(
     <div className="col-sm-4">
       <div className="card">
-        <img className="card-img-top" src={product.img} alt={product.id} width="35%"/>
+        <img className="card-img-top" src={product.image} alt={product.id} width="35%"/>
         {/* <div className="card-body">
           <p className="card-text">{product.id}</p>
         </div> */}
@@ -22,7 +22,7 @@ const ItemRow = ({product, onClick, operation}) => {
           <p className="card-text text-dark"><strong>Total Items  :</strong> {product.count}</p>
         </div>
         {/* <div className="card-body">
-          <p className="card-text text-dark">{product.desc}</p>
+          <p className="card-text text-dark">{product.description}</p>
         </div>         */}
         <ItemRowOperation product={product} onClick={onClick} operation={operation} />
       </div>
