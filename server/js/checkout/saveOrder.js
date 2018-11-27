@@ -12,7 +12,8 @@ module.exports = function (req,res) {
 			if (err) throw err;
 		    for(var x=0;x<getAllProducts.length;x++){
 		    	const productId = getAllProducts[x].id;
-				conn.query("INSERT INTO order_details(`order_id`,`product_id`) VALUES('"+lastInsertID+"','"+productId+"')", function (err, result, fields) {
+		    	const qty = getAllProducts[x].qty;
+				conn.query("INSERT INTO order_details(`order_id`,`product_id`,`qty`) VALUES('"+lastInsertID+"','"+productId+"','"+qty+"')", function (err, result, fields) {
 					if (err) throw err;				
 				});	    
 			}

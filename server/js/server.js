@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 const checkLogin = require('./user/login.js');
 const getAllProducts = require('./products/products.js');
-const saveOrder = require('./products/saveOrder.js');
+const saveOrder = require('./checkout/saveOrder.js');
 const getPaymentMethods = require('./payment/paymentMethods.js');
 const getCountries = require('./common/countries.js');
 

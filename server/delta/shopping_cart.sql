@@ -286,9 +286,9 @@ CREATE TABLE IF NOT EXISTS `orders` (
   KEY `FK_orders_payment_types` (`payment_type`),
   CONSTRAINT `FK_orders_payment_types` FOREIGN KEY (`payment_type`) REFERENCES `payment_types` (`id`),
   CONSTRAINT `FK_orders_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
--- Dumping data for table shopping_cart.orders: ~1 rows (approximately)
+-- Dumping data for table shopping_cart.orders: ~0 rows (approximately)
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 
@@ -297,14 +297,15 @@ CREATE TABLE IF NOT EXISTS `order_details` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL DEFAULT '0',
   `product_id` int(11) NOT NULL DEFAULT '0',
+  `qty` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `FK_order_details_orders` (`order_id`),
   KEY `FK_order_details_products` (`product_id`),
   CONSTRAINT `FK_order_details_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_order_details_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
--- Dumping data for table shopping_cart.order_details: ~2 rows (approximately)
+-- Dumping data for table shopping_cart.order_details: ~0 rows (approximately)
 /*!40000 ALTER TABLE `order_details` DISABLE KEYS */;
 /*!40000 ALTER TABLE `order_details` ENABLE KEYS */;
 
@@ -355,9 +356,9 @@ CREATE TABLE IF NOT EXISTS `shipping_details` (
   KEY `FK_shipping_details_country` (`country`),
   CONSTRAINT `FK_shipping_details_country` FOREIGN KEY (`country`) REFERENCES `country` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_shipping_details_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
--- Dumping data for table shopping_cart.shipping_details: ~1 rows (approximately)
+-- Dumping data for table shopping_cart.shipping_details: ~0 rows (approximately)
 /*!40000 ALTER TABLE `shipping_details` DISABLE KEYS */;
 /*!40000 ALTER TABLE `shipping_details` ENABLE KEYS */;
 
