@@ -4,7 +4,7 @@ class ProductApi {
   static getAllProducts(dispatch) {
     let list = {};
 
-    const request = axios.post('http://localhost:9000/test', {
+    const request = axios.get('http://localhost:3300/getAllProducts', {
       headers: {
         'Content-Type': 'application/json'
       }

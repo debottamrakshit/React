@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
-import productApi from '../api/mockProductApi';
+import productApi from '../api/ProductApi';
 
 
 export function loadProductSuccess(products) {

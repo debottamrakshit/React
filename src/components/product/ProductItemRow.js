@@ -6,7 +6,7 @@ const ProductItemRow = ({product, index, addToCart, productCheckout}) => {
   return(
     <div className="col-sm-4">
       <div className="card">
-        <img className="card-img-top" src={product.img} alt="Card image cap" width="35%"/>
+        <img className="card-img-top" src={product.image} alt="Card image cap" width="35%"/>
         <div className="card-body">
           <p className="card-text text-info">{product.name}</p>
         </div>
@@ -14,7 +14,7 @@ const ProductItemRow = ({product, index, addToCart, productCheckout}) => {
           <p className="card-text text-dark">{product.price}</p>
         </div>
         <div className="card-body">
-          <p className="card-text">{product.desc}</p>
+          <p className="card-text">{product.description}</p>
         </div>
         <div class="card-body">
           <a href="#" onClick={(e) => addToCart(e, index, product)} >Add to Cart</a> 
