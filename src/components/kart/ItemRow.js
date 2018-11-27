@@ -1,8 +1,10 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import ItemRowOperation from './ItemRowOperation';
+
 
  
-const ItemRow = ({product, onClick}) => {
+const ItemRow = ({product, onClick, operation}) => {
   return(
     <div className="col-sm-4">
       <div className="card">
@@ -14,14 +16,15 @@ const ItemRow = ({product, onClick}) => {
           <p className="card-text text-info">{product.name}</p>
         </div>
         <div className="card-body">
-          <p className="card-text text-dark">{product.price}</p>
+          <p className="card-text text-dark"><strong>Total Price  :</strong>{product.price}</p>
+        </div> 
+        <div className="card-body">          
+          <p className="card-text text-dark"><strong>Total Items  :</strong> {product.count}</p>
         </div>
-        <div className="card-body">
-          <p className="card-text">{product.desc}</p>
-        </div>
-        <div className="card-body">            
-            <a href="#" onClick={() => onClick(product.id)} class="badge badge-pill badge-primary" aria-pressed="true">Remove</a>
-        </div>
+        {/* <div className="card-body">
+          <p className="card-text text-dark">{product.desc}</p>
+        </div>         */}
+        <ItemRowOperation product={product} onClick={onClick} operation={operation} />
       </div>
     </div>     
   );

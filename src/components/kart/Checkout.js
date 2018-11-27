@@ -16,10 +16,11 @@ class Checkout extends React.Component{
     this.state = {
       address: [],
       product: Object.assign([], props.product),
-      errors: {},
+      errors: {},      
       paymentOptions: Object.assign([], props.paymentOptionProps),
-      paymentType : {}, 
-      totalCheckoutAmount: props.totalProductCost
+      paymentType : "", 
+      totalCheckoutAmount: props.totalProductCost,
+      showRemoveProduct: true
     };
    this.changeDataOnPage=this.changeDataOnPage.bind(this);
    this.saveCheckoutInformation=this.saveCheckoutInformation.bind(this);
@@ -57,8 +58,9 @@ componentDidMount(){
       this.setState({totalCheckoutAmount: newProps.totalProductCost});
     }
 
-  }
 
+
+  }
 
   selectPaymentTypes(event){
     const field = event.target.name;
@@ -70,7 +72,7 @@ componentDidMount(){
   changeDataOnPage(event){    
     const field = event.target.name;     
     let address = this.state.address;    
-    address[field] = event.target.value;
+    address[field] = event.target.value.toUpperCase();
     return this.setState({address:address});
   }
 
@@ -80,7 +82,16 @@ componentDidMount(){
     let checkoutSubmit = [];
 
     checkoutSubmit.address=this.state.address;
-    checkoutSubmit.product=this.state.product;   
+    checkoutSubmit.product=this.state.product;
+
+    let type = this.state.paymentType;
+    let totalCost = this.state.totalCheckoutAmount;
+   
+    let payementTypeToSubmit = {};
+    payementTypeToSubmit.type=type;
+    payementTypeToSubmit.totalCost = totalCost;
+    checkoutSubmit.payment = payementTypeToSubmit;
+    
     
     this.props.actions.saveCheckout(checkoutSubmit).
     then(() => this.redirect()).
@@ -121,20 +132,22 @@ componentDidMount(){
   render() {    
     return (
       <div className="container">
-         <h1 className="bg-success">CHECKOUT PAGE</h1>
-         <h2 className="bg-info lead text-center">Payment Options ....</h2>
-          <PaymentOption options={this.state.paymentOptions} value={this.state.paymentType}  onChange={this.selectPaymentTypes} totalCost={this.state.totalCheckoutAmount}/>
-          <h2 className="bg-info lead text-center">Address ....</h2>
-          <AddressForm address={this.state.address} 
-            onChange={this.changeDataOnPage.bind(this)} 
-            onSave={this.saveCheckoutInformation} 
-            countries={this.props.countries}  errors={this.state.errors}/>
-         <h2 className="bg-info lead text-center">product ....</h2>
-         <KartItemList kartItems={this.state.product} onClick={this.productToRemove} />
-
-         <div className="d-flex justify-content-between align-items-center">
+          <div className="text-center col-md-12 col-md-offset-0">
             <input type="submit" value="Save" onClick={this.saveCheckoutInformation}  className="btn btn-primary"/> 
          </div>
+         <div className="text-center col-md-12 col-md-offset-0">
+            <h1 className="bg-success text-left">CHECKOUT PAGE</h1>
+            <h2 className="bg-info lead text-center">Payment Options ....</h2>
+              <PaymentOption options={this.state.paymentOptions} value={this.state.paymentType}  onChange={this.selectPaymentTypes} totalCost={this.state.totalCheckoutAmount}/>
+              <h2 className="bg-info lead text-center">Address ....</h2>
+              <AddressForm address={this.state.address} 
+                onChange={this.changeDataOnPage.bind(this)} 
+                onSave={this.saveCheckoutInformation} 
+                countries={this.props.countries}  errors={this.state.errors}/>
+            <h2 className="bg-info lead text-center">Product ....</h2>
+            <KartItemList kartItems={this.state.product} onClick={this.productToRemove} operation={this.state.showRemoveProduct}/>
+         </div>
+         
       </div>
     )
   }

@@ -7,7 +7,7 @@ const CHECKOUT = [
                 img:"/shared/images/iphone6s.1.jfif",
                 name:"Apple iPhone 6 (Gold, 1GB RAM, 32GB Storage)",
                 desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
-                price:"10 INR"
+                price:"10,000.45 INR"
                 
              },
              {  
@@ -15,7 +15,7 @@ const CHECKOUT = [
                 img:"/shared/images/iphone6s.jfif",
                 name:"Apple iPhone 6 (Space Grey, 1GB RAM, 32GB Storage)",
                 desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
-                price:"11 INR"
+                price:"10,000.45 INR"
              }
              ,
              {  
@@ -23,14 +23,27 @@ const CHECKOUT = [
                 img:"/shared/images/iphone6s.jfif",
                 name:"Apple iPhone 6 (Space Grey, 1GB RAM, 32GB Storage)",
                 desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
-                price:"12 INR"
+                price:"10,000.45 INR"
              },
              {  
                 id:"prd004",
                 img:"/shared/images/iphone6s.jfif",
                 name:"Apple iPhone 6 (Space Grey, 1GB RAM, 32GB Storage)",
                 desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
-                price:"13 INR"
+                price:"10,000.45 INR"
+             },
+             {  
+                id:"prd005",
+                img:"/shared/images/iphone6s.jfif",
+                name:"Apple iPhone 6 (Space Grey, 1GB RAM, 32GB Storage)",
+                desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
+                price:"10,000.45 INR"
+             },{  
+                id:"prd006",
+                img:"/shared/images/iphone6s.1.jfif",
+                name:"Apple iPhone 6 (Gold, 1GB RAM, 32GB Storage)",
+                desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
+                price:"10,000.45 INR"
              }
        ],
        "address":[  
@@ -47,7 +60,8 @@ const CHECKOUT = [
        ],
        "payment":[  
           {  
-             "type":"COD"
+             "type":"COD", 
+             "totalCost":"1000.12"
           }
        ]
     }
@@ -68,7 +82,7 @@ class checkoutApi{
          return new Promise((resolve, reject) => {
              setTimeout(() => { 
                 if(checkout){
-                    const minAddressLine = 1;
+                    const minAddressLine = 1;                     
                     if(!checkout.address){
                         errors.concat("No Address is mention in checkout page") 
                         
@@ -90,7 +104,7 @@ class checkoutApi{
                         }else{
                             if(addressValidated.city.length < minAddressLine){
                                 reject('City must be greater than ${minAddressLine} chars');
-                            }
+                            }                            
                         }
 
                         if(!addressValidated.state ){
@@ -100,13 +114,29 @@ class checkoutApi{
                                 reject('State must be equals to 2');
                             }
                         }
+                        if(!addressValidated.zip ){
+                            reject('Zip is required');
+                        }else{
+                            var numbers = /^[0-9]+$/; 
+                            if(!addressValidated.zip.match(numbers)){
+                                reject('Zip Code must be Numeric');
+                            }
+                        }
 
                         if(!addressValidated.country ){
                             reject('Country is required');
                         }
-
                     }
-
+                    
+                    if(checkout.hasOwnProperty('payment') && checkout.payment.hasOwnProperty('type')){
+                        let paymentType = checkout.payment.type;
+                        if(paymentType == "")  {
+                            reject('Please select the Payment Type');
+                        }
+                    }else{
+                        reject('Please select the Payment Type');
+                    }                   
+                    
                     if(!checkout.product || checkout.product.length == 0) {
                         reject("No Item to checkout")
                     }

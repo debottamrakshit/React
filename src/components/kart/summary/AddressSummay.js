@@ -3,12 +3,29 @@ import {address} from 'bootstrap';
 
 const AddressSummary = ({address}) =>{
       return (
-      <address className="form-inline">
-              {address.line1} <br></br>{address.line2} <br></br>{address.city}<br></br>
-              {address.state}<br></br>{address.zip}<br></br>{address.countryName}
+        <div className="row">
+            <div className="col-sm-12">
+              <strong className="strong">{address.line1}</strong>
+            </div>    
+            <div className="col-sm-12">
+              <strong className="strong">{address.line2}</strong>
+            </div>    
+            <div className="col-sm-12">
+              <strong className="strong">{address.city}</strong>
+              <strong>&nbsp;</strong> 
+              <strong>,</strong>
+              <strong>&nbsp;</strong> 
+              <strong className="strong">{address.state}</strong>
+              <strong>&nbsp;</strong>    
+              <strong className="strong">{address.zip}</strong>
+            </div>                
+            <div className="col-sm-12">
+            <strong className="strong">{address.countryName}</strong>
+            </div>
+        </div>
+    ) 
 
-        </address>
-    )  
+    
 }
 
 AddressSummary.propsTypes = {
