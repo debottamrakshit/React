@@ -24,7 +24,7 @@ const AddressForm = ({address, onChange, onSave, countries, errors}) => {
             
             <TextInput name="zip" label="Zip Code" 
             value={address.zip}  
-            onChange={onChange} size="6" placeholder="Zip" error={errors.zip}/>
+            onChange={onChange} size="30" placeholder="Zip" error={errors.zip}/>
             
             <SelectInput name="country" label="Country" 
             defaultOption="Select Country" 
