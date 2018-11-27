@@ -9,9 +9,9 @@ const ItemRow = ({product, onClick, operation}) => {
     <div className="col-sm-4">
       <div className="card">
         <img className="card-img-top" src={product.img} alt={product.id} width="35%"/>
-        <div className="card-body">
+        {/* <div className="card-body">
           <p className="card-text">{product.id}</p>
-        </div>
+        </div> */}
         <div className="card-body">
           <p className="card-text text-info">{product.name}</p>
         </div>

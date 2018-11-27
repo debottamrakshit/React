@@ -3,19 +3,24 @@ import SelectInput from '../common/SelectInput';
 
 const PaymentOption =  ({options, value, onChange, totalCost}) => {
     return(        
-            <div classsName="row">
-                <div classsName="col-md-4 col-md-offset-0">
-                    <form>
-                        <SelectInput name="paymentType" label="Payment Option" 
+        <div classsName="container">
+            <div className="well well-sm">
+                <form>
+                    <SelectInput name="paymentType" label="Payment Option" 
                         defaultOption="Payment Option" 
                         options={options} 
                         value={value} size="30" placeholder="Payment Option" onChange={onChange} />
-                    </form>
+                </form>
+                <p className="text-primary text-left"><strong>Total Cost :</strong> {totalCost}</p>
+            </div>
+            <div classsName="row">                
+                <div className="">
+                    <div className="well well-sm">
+                        
+                    </div>                
                 </div>
-                <div classsName="col-md-4 col-md-offset-0">
-                    <p className="text-primary">Total Cost : {totalCost}</p>
-                </div>
-            </div>        
+            </div>    
+        </div>        
     );
 }
 

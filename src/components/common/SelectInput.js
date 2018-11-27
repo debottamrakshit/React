@@ -7,7 +7,7 @@ const SelectInput = ({name, label, onChange, defaultOption, value, error, option
           <div className="col-sm-2">
               <label htmlFor={name}>{label}</label>
           </div>
-          <div className="col-sm-2">
+          <div className="col-sm-10">
             <div className="field">
               <select
                 name={name}

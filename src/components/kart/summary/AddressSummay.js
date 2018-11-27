@@ -1,5 +1,4 @@
-import React, {PropTypes} from 'react'
-import {address} from 'bootstrap';
+import React, {PropTypes} from 'react';
 
 const AddressSummary = ({address}) =>{
       return (

@@ -12,7 +12,7 @@ const TextInput = ({name, label, onChange, placeholder, value, error, size}) => 
           <div className="col-sm-2">
             <label htmlFor={name}>{label}</label>
           </div>
-          <div className="col-sm-2">
+          <div className="col-sm-10">
             <div className="field">
               <input
                 type="text"
