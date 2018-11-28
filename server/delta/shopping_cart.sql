@@ -286,7 +286,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   KEY `FK_orders_payment_types` (`payment_type`),
   CONSTRAINT `FK_orders_payment_types` FOREIGN KEY (`payment_type`) REFERENCES `payment_types` (`id`),
   CONSTRAINT `FK_orders_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table shopping_cart.orders: ~0 rows (approximately)
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
@@ -303,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `order_details` (
   KEY `FK_order_details_products` (`product_id`),
   CONSTRAINT `FK_order_details_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_order_details_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table shopping_cart.order_details: ~0 rows (approximately)
 /*!40000 ALTER TABLE `order_details` DISABLE KEYS */;
@@ -332,13 +332,17 @@ CREATE TABLE IF NOT EXISTS `products` (
   `price` int(11) NOT NULL,
   `image` varchar(1000) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- Dumping data for table shopping_cart.products: ~2 rows (approximately)
+-- Dumping data for table shopping_cart.products: ~6 rows (approximately)
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`) VALUES
-	(1, 'Honor 8X', 'Get Guaranteed Exchange Price of ₹ 6,000 if you exchange in 6-8 months and ₹ 5,200 in 9-12 months', 50, '/shared/images/iphone6s.jfif'),
-	(2, 'All-new Echo Dot (3rd Gen) - Smart speaker with Alexa (Black)', 'Echo Dot is our most popular voice-controlled speaker, now with an improved sound and a new design.', 70, '/shared/images/iphone6s.1.jfif');
+	(1, 'Gome C7 Note', 'Gome C7 Note device was launched in October, 2018 and features a 6.1 inches screen, IPS LCD capacitive touchscreen, 16M colors', 30000, '/shared/images/phones/1543227808.jpg'),
+	(2, 'Samsung Galaxy A9', 'Samsung Galaxy A9 device was launched in October, 2018 and features a 6.1 inches screen, IPS LCD capacitive touchscreen, 16M colors', 20000, '/shared/images/phones/1543298196.jpg'),
+	(3, 'Apple iPhone XR', 'Apple iPhone XR device was launched in October, 2018 and features a 6.1 inches screen, IPS LCD capacitive touchscreen, 16M colors', 50000, '/shared/images/phones/1536819952.jpg'),
+	(4, 'Nokia 7.1', 'Nokia 7.1 device was launched in October, 2018 and features a 6.1 inches screen, IPS LCD capacitive touchscreen, 16M colors', 35000, '/shared/images/phones/1538802552.jpg'),
+	(5, 'Xiaomi Redmi 6A', 'Xiaomi Redmi 6A device was launched in June, 2018 and features a 6.1 inches screen, IPS LCD capacitive touchscreen, 16M colors', 25000, '/shared/images/phones/1530511103.jpg'),
+	(6, 'Micromax Bharat 2+', 'Micromax Bharat 2+ device was launched in October, 2017 and features a 6.1 inches screen, IPS LCD capacitive touchscreen, 16M colors', 22000, '/shared/images/phones/1511769685.jpg');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 
 -- Dumping structure for table shopping_cart.shipping_details
@@ -356,7 +360,7 @@ CREATE TABLE IF NOT EXISTS `shipping_details` (
   KEY `FK_shipping_details_country` (`country`),
   CONSTRAINT `FK_shipping_details_country` FOREIGN KEY (`country`) REFERENCES `country` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_shipping_details_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table shopping_cart.shipping_details: ~0 rows (approximately)
 /*!40000 ALTER TABLE `shipping_details` DISABLE KEYS */;
