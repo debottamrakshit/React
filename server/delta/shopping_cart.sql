@@ -342,7 +342,10 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`) VALUES
 	(3, 'Apple iPhone XR', 'Apple iPhone XR device was launched in October, 2018 and features a 6.1 inches screen, IPS LCD capacitive touchscreen, 16M colors', 50000, '/shared/images/phones/1536819952.jpg'),
 	(4, 'Nokia 7.1', 'Nokia 7.1 device was launched in October, 2018 and features a 6.1 inches screen, IPS LCD capacitive touchscreen, 16M colors', 35000, '/shared/images/phones/1538802552.jpg'),
 	(5, 'Xiaomi Redmi 6A', 'Xiaomi Redmi 6A device was launched in June, 2018 and features a 6.1 inches screen, IPS LCD capacitive touchscreen, 16M colors', 25000, '/shared/images/phones/1530511103.jpg'),
-	(6, 'Micromax Bharat 2+', 'Micromax Bharat 2+ device was launched in October, 2017 and features a 6.1 inches screen, IPS LCD capacitive touchscreen, 16M colors', 22000, '/shared/images/phones/1511769685.jpg');
+	(6, 'Micromax Bharat 2+', 'Micromax Bharat 2+ device was launched in October, 2017 and features a 6.1 inches screen, IPS LCD capacitive touchscreen, 16M colors', 22000, '/shared/images/phones/1511769685.jpg'),
+	(7, 'Sony Xperia XA2', 'Sony Xperia XA2 device was launched in October, 2018 and features a 6.1 inches screen, IPS LCD capacitive touchscreen, 16M colors', 15000, '/shared/images/phones/1515475620.jpg'),
+	(8, 'Google Pixel 2', 'Google Pixel 2 device was launched in October, 2018 and features a 6.1 inches screen, IPS LCD capacitive touchscreen, 16M colors', 28000, '/shared/images/phones/1507271857.jpg'),
+	(9, 'Lenovo Z5 Pro', 'Lenovo Z5 Pro device was launched in October, 2018 and features a 6.1 inches screen, IPS LCD capacitive touchscreen, 16M colors', 14000, '/shared/images/phones/1541224703.jpg');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 
 -- Dumping structure for table shopping_cart.shipping_details
