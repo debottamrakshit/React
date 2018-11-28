@@ -4,9 +4,8 @@ import React, {PropTypes} from 'react';
 const KartInfo = ({count}) => {
     return(
         <div className="container kartInfo">
-            <span><strong>Cart Items:</strong> {count}</span>
-        </div> 
-
+            <span><span className="glyphicon glyphicon-shopping-cart"></span> <strong>Cart Items:</strong> {count}</span>
+        </div>
     ); 
 };
 

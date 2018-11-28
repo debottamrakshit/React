@@ -19,8 +19,8 @@ const ProductItemRow = ({product, index, addToCart, productCheckout}) => {
           <p className="card-text desc">{product.description}</p>
         </div>
         <div class="card-body">
-          <a href="#" className="cartBtns" onClick={(e) => addToCart(e, index, product)} >Add to Cart</a> 
-          <a href="#" className="cartBtns" onClick={(e) => productCheckout(e, index, product)} >Checkout</a>       
+          <a href="#" className="cartBtns" onClick={(e) => addToCart(e, index, product)} ><span className="glyphicon glyphicon-plus"></span> Add to Cart</a> 
+          <a href="#" className="cartBtns" onClick={(e) => productCheckout(e, index, product)} ><span className="glyphicon glyphicon-shopping-cart"></span> Checkout</a>       
         </div>
       </div>
     </div>     
