@@ -3,10 +3,8 @@ import React, {PropTypes} from 'react';
 
 const KartInfo = ({count}) => {
     return(
-        <div className="container">
-            <div className="row">
-                <p>{count}</p>
-            </div>
+        <div className="container kartInfo">
+            <span><strong>Cart Items:</strong> {count}</span>
         </div> 
 
     ); 

@@ -1,9 +1,12 @@
 /* Styles */
+.container{
+	max-width:900px;
+	padding:0px;
+}
+
 #app {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #4d4d4d;
-  min-width: 550px;
-  max-width: 850px;
   margin: 0 auto;
 }
 
@@ -23,3 +26,81 @@ nav {
   text-align: left;
 }
 
+.prodList .card{
+	border: 1px dotted #666;
+    padding: 10px;
+    border-radius: 8px;
+    text-align:center;
+    min-height: 350px;
+}
+
+.prodList .prodItem{
+	margin-bottom:10px;
+}
+
+.cartBtns, .cartBtns:hover, .cartBtns.active, .cartBtns:focus{
+	background-color:#000;
+	color:#fff;
+	font-size:12px;
+	padding:5px 10px;
+	margin-right:5px;
+	border-radius:5px;
+	text-decoration:none;
+}
+
+.cartBtns:hover,.cartBtns.active{
+	background-color:#ccc;
+	color:#000;
+}
+
+.prodList .card-body{
+	margin-bottom:5px;
+}
+
+.prodList p{
+	margin:12px 0px;
+}
+
+.prodList .desc{
+	font-size:12px;
+}
+
+.prodList .title{
+	margin:5px 0px;
+	font-weight:bold;
+}
+
+.prodImg{
+	text-align:center;
+}
+
+.prodList .card-img-top{
+	width:50%;
+	text-align:center;
+}
+
+nav{
+	background-color:#2874f0;
+	padding:20px;
+}
+
+nav a, nav a:hover,nav a.active,nav a:focus{
+	background-color:#FFFF00;
+	color:#000;
+	font-size:13px;
+	padding:6px 12px;
+	margin-right:5px;
+	border-radius:5px;
+	text-decoration:none;
+	box-shadow: 1px 1px 5px rgba(0,0,0,.3);
+}
+
+nav a:hover,nav a.active{
+	color:#000;
+	background-color:#fff;
+}
+
+.kartInfo{
+	padding:10px;
+	text-align:right;
+}

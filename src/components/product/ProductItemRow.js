@@ -4,22 +4,23 @@ import {Link} from 'react-router';
  
 const ProductItemRow = ({product, index, addToCart, productCheckout}) => {
   return(
-    <div className="col-sm-4">
+    <div className="col-sm-4 prodItem">
       <div className="card">
-        <img className="card-img-top" src={product.image} alt="Card image cap" width="35%"/>
+        <div className="prodImg">
+          <img className="card-img-top" src={product.image} alt="Card image cap"/>
+        </div>  
         <div className="card-body">
-          <p className="card-text text-info">{product.name}</p>
+          <p className="card-text text-info title">{product.name}</p>
         </div>
         <div className="card-body">
-          <p className="card-text text-dark">{product.price}</p>
+          <p className="card-text text-dark">Price: ${product.price}</p>
         </div>
         <div className="card-body">
-          <p className="card-text">{product.description}</p>
+          <p className="card-text desc">{product.description}</p>
         </div>
         <div class="card-body">
-          <a href="#" onClick={(e) => addToCart(e, index, product)} >Add to Cart</a> 
-          |
-          <a href="#" onClick={(e) => productCheckout(e, index, product)} >Checkout</a>       
+          <a href="#" className="cartBtns" onClick={(e) => addToCart(e, index, product)} >Add to Cart</a> 
+          <a href="#" className="cartBtns" onClick={(e) => productCheckout(e, index, product)} >Checkout</a>       
         </div>
       </div>
     </div>     

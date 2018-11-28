@@ -4,7 +4,7 @@ import ProductItemRow from './ProductItemRow';
 
 const ProductItemList = ({productItems, addToCart, productCheckout}) => {
     return(
-        <div className="container">
+        <div className="container prodList">
             <div className="row">
                 {productItems.map((item, i) =>
                        <ProductItemRow index={i} product={item} addToCart={addToCart} productCheckout={productCheckout}/> 
