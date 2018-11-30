@@ -11,7 +11,7 @@ const PaymentOption =  ({options, value, onChange, totalCost}) => {
                         options={options} 
                         value={value} size="30" placeholder="Payment Option" onChange={onChange} />
                 </form>
-                <p className="text-primary text-left"><strong>Total Cost :</strong> {totalCost}</p>
+                <p className="text-primary text-left"><strong>Total Cost:</strong> ${totalCost}</p>
             </div>
         </div>        
     );
