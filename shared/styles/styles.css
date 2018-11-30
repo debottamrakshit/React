@@ -14,8 +14,13 @@ a.active {
   color: orange;
 }
 
-nav {
+.navigation {
   padding-top: 20px;
+}
+
+nav{
+	max-width:900px;
+	margin:auto !important;
 }
 
 .form-control{
@@ -80,24 +85,32 @@ nav {
 	text-align:center;
 }
 
-nav{
+.navBtns{
+	margin-top:24px;
+}
+
+.navigation{
 	background-color:#2874f0;
-	padding:20px;
+	padding:10px;
 	border-bottom:4px solid #f8e831;
 }
 
-nav a, nav a:hover,nav a.active,nav a:focus{
+.navigation a, .navigation a:hover,.navigation a.active,.navigation a:focus{
 	background-color:#f8e831;
 	color:#000;
 	font-size:13px;
-	padding:6px 12px;
-	margin-right:5px;
+	padding:8px 12px;
+	margin-right:10px;
 	border-radius:5px;
 	text-decoration:none;
 	box-shadow: 1px 1px 5px rgba(0,0,0,.3);
 }
 
-nav a:hover,nav a.active{
+.navigation a:last-child{
+	margin-right:0px;
+}
+
+.navigation a:hover,.navigation a.active{
 	color:#000;
 	background-color:#fff;
 }
@@ -157,4 +170,13 @@ input.form-control-sm{
     border-radius: 5px;
     padding:5px 10px;
     font-weight:normal;
+}
+
+.footer{
+	text-align:center;
+	background-color:#222;
+	color:#fff;
+	padding:10px;
+	border-top:2px solid #f8e831;
+	margin-top:10px;
 }

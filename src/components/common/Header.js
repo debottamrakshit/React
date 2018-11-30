@@ -4,11 +4,16 @@ import {Link, IndexLink} from 'react-router';
 
 const Header = () => {
   return (    
-      <div>
-         <nav>
-            <IndexLink to="/" activeClassName="active"><span className="glyphicon glyphicon-home"></span> Home</IndexLink>
-            <Link to="/checkout" activeClassName="active"><span className="glyphicon glyphicon-shopping-cart"></span> Checkout</Link>
-        </nav>    
+      <div className="navigation">      	
+         <nav className="row">
+	         <div className="col-sm-4 noPadding">
+	      		<img src="/shared/images/logo.png" width="30%"/>
+	      	</div>
+      		<div className="col-sm-8 text-right navBtns noPadding">
+            	<IndexLink to="/" activeClassName="active"><span className="glyphicon glyphicon-home"></span> Home</IndexLink>
+            	<Link to="/checkout" activeClassName="active"><span className="glyphicon glyphicon-shopping-cart"></span> Checkout</Link>
+            </div>
+        </nav>            
       </div>
   );
 };

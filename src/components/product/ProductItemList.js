@@ -8,7 +8,7 @@ const ProductItemList = ({productItems, addToCart, productCheckout}) => {
             <div className="row">
                 {productItems.map((item, i) =>
                        <ProductItemRow index={i} product={item} addToCart={addToCart} productCheckout={productCheckout}/> 
-                )};              
+                )}             
             </div>
         </div> 
 

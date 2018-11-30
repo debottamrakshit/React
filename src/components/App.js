@@ -8,11 +8,14 @@ class App extends React.Component{
     }
     render(){
         return (
-            <div className="container">
-                <Header />  
-                {this.props.children}                  
+            <div>
+                <Header /> 
+                <div className="container">
+                    {this.props.children}                  
+                </div>
+                <div className="footer">All Rights Reserved</div>
             </div>
-        );
+        )
     }
 }
 App.propTypes={
