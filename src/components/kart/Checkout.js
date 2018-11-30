@@ -136,7 +136,7 @@ componentDidMount(){
             <input type="submit" value="Proceed to Checkout" onClick={this.saveCheckoutInformation}  className="btn btn-primary"/> 
          </div>
          <div className="col-md-12 noPadding">
-            <h1>CHECKOUT PAGE</h1>
+            <h1>Checkout</h1>
             <h2 className="collapsible">Select Payment Method</h2>
               <PaymentOption options={this.state.paymentOptions} value={this.state.paymentType}  onChange={this.selectPaymentTypes} totalCost={this.state.totalCheckoutAmount}/>
               <h2 className="collapsible">Shipping Detail</h2>
@@ -144,7 +144,7 @@ componentDidMount(){
                 onChange={this.changeDataOnPage.bind(this)} 
                 onSave={this.saveCheckoutInformation} 
                 countries={this.props.countries}  errors={this.state.errors}/>
-            <h2 className="collapsible">Selected Products</h2>
+            <h2 className="collapsible">Items Ordered</h2>
             <KartItemList kartItems={this.state.product} onClick={this.productToRemove} operation={this.state.showRemoveProduct}/>
          </div>
          

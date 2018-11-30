@@ -2,24 +2,18 @@ import React, {PropTypes} from 'react';
 
 const AddressSummary = ({address}) =>{
       return (
-        <div className="row">
+        <div className="row normalPadding">
             <div className="col-sm-12">
-              <strong className="strong">{address.line1}</strong>
+              {address.line1}
             </div>    
             <div className="col-sm-12">
-              <strong className="strong">{address.line2}</strong>
+              {address.line2}
             </div>    
-            <div className="col-sm-12">
-              <strong className="strong">{address.city}</strong>
-              <strong>&nbsp;</strong> 
-              <strong>,</strong>
-              <strong>&nbsp;</strong> 
-              <strong className="strong">{address.state}</strong>
-              <strong>&nbsp;</strong>    
-              <strong className="strong">{address.zip}</strong>
+            <div className="col-sm-12">              
+              {address.city}, {address.state}, {address.zip}
             </div>                
             <div className="col-sm-12">
-            <strong className="strong">{address.countryName}</strong>
+            {address.countryName}
             </div>
         </div>
     ) 

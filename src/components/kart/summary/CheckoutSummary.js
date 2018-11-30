@@ -17,56 +17,62 @@ class CheckoutSummary extends React.Component {
   render() {
     return (
         <div className="container">
+            <div className="text-right normalPadding">
+                <input type="submit" value="Submit Order" className="btn btn-primary"/> 
+             </div>
+            <h1>Order Summary</h1>
             <div className="row">
-              <div className="text-center col-md-12 col-md-offset-0">           
-                    <h4 className="text-uppercase bg-success text-center">DELIVERY DETAILS: </h4>
+              <div className="col-md-12">           
+                    <h2 className="collapsible">Shipping Details</h2>
                 </div>                             
             </div> 
-            <div className="row">
-                <div className="col-sm-3">                
-                    <p className="text-uppercase">Order Placed: </p>
+            <div className="normalPadding">
+                <div className="row">
+                    <div className="col-sm-3">                
+                        <p>Order Placed: </p>
+                    </div>
+                    <div className="col-sm-2">
+                        <p className="font-weight-bold">{new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(new Date())))}</p>
+                    </div>                
+                </div> 
+                <div className="row">
+                    <div className="col-sm-3">         
+                        <p>Delivery Option:    </p>
+                        
+                    </div>
+                    <div className="col-sm-3">         
+                        {this.state.payment.type == "COD" ? "Cash On Delivery": ""}
+                    </div>
                 </div>
-                <div className="col-sm-2">
-                    <p className="font-weight-bold">{new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(new Date())))}</p>
-                </div>                
-            </div> 
-            <div className="row">
-                <div className="col-sm-3">         
-                    <p className="text-uppercase">Delivery Option:    </p>
-                    
-                </div>
-                <div className="col-sm-3">         
-                    {this.state.payment.type == "COD" ? "Cash On Delivery": ""}
+                <div className="row">
+                    <div className="col-sm-3">         
+                        <p>Order Number:    </p>
+                        
+                    </div>
+                    <div className="col-sm-3">         
+                        PLACEHOLDER
+                    </div>
+                </div> 
+                <div className="row">
+                    <div className="col-sm-3">         
+                        <p>Order Total:    </p>
+                        
+                    </div>
+                    <div className="col-sm-3">         
+                      {this.state.payment.totalCost}
+                    </div>
                 </div>
             </div>
             <div className="row">
-                <div className="col-sm-3">         
-                    <p className="text-uppercase">Order Number:    </p>
-                    
-                </div>
-                <div className="col-sm-3">         
-                    PLACEHOLDER
-                </div>
-            </div> 
-            <div className="row">
-                <div className="col-sm-3">         
-                    <p className="text-uppercase">Order Total:    </p>
-                    
-                </div>
-                <div className="col-sm-3">         
-                  {this.state.payment.totalCost}
-                </div>
-            </div>   
-            <div className="row">
-                <div className="text-center col-md-12 col-md-offset-0">           
-                    <h4 className="text-uppercase bg-success text-center">SHIPPED TO: </h4>
+                <div className="col-md-12">           
+                    <h2 className="collapsible">Shipped To</h2>
                 </div>   
             </div>
             <AddressSummary address={this.state.address} />
 
             <div className="row">
-                <div className="text-center col-md-12 col-md-offset-0">           
-                    <h4 className="text-uppercase bg-success text-center">ITEMS ORDERED: </h4>
+                <div className="col-md-12">           
+                    <h2 className="collapsible">Items Ordered</h2>
                 </div>   
             </div>
             <div className="row">                
