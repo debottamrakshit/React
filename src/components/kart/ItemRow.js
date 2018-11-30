@@ -16,10 +16,10 @@ const ItemRow = ({product, onClick, operation}) => {
           <p className="card-text text-info">{product.name}</p>
         </div>
         <div className="card-body">
-          <p className="card-text text-dark"><strong>Total Price  :</strong>{product.price}</p>
+          <p className="card-text text-dark"><strong>Total Price:</strong> ${product.price}</p>
         </div> 
         <div className="card-body">          
-          <p className="card-text text-dark"><strong>Total Items  :</strong> {product.count}</p>
+          <p className="card-text text-dark"><strong>Total Items:</strong> {product.count}</p>
         </div>
         {/* <div className="card-body">
           <p className="card-text text-dark">{product.description}</p>
