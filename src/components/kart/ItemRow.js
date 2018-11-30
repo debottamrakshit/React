@@ -6,9 +6,9 @@ import ItemRowOperation from './ItemRowOperation';
  
 const ItemRow = ({product, onClick, operation}) => {
   return(
-    <div className="col-sm-4">
-      <div className="card">
-        <img className="card-img-top" src={product.image} alt={product.id} width="35%"/>
+    <div className="col-sm-3">
+      <div className="card prodImgChk">
+        <img className="card-img-top normalPadding" src={product.image} alt={product.id} width="50%"/>
         {/* <div className="card-body">
           <p className="card-text">{product.id}</p>
         </div> */}

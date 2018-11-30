@@ -16,7 +16,7 @@ const ItemRowOperation = ({product, onClick, operation}) => {
   return(      
     <div className="card-body"> 
     {operation &&
-       <a href="#" onClick={() => onClick(product.id)} class="badge badge-pill badge-primary" aria-pressed="true">Remove</a>       
+       <a href="#" onClick={() => onClick(product.id)} className="badge badge-pill badge-primary" aria-pressed="true">Remove</a>       
     }           
     </div>
   );

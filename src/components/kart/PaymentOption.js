@@ -4,7 +4,7 @@ import SelectInput from '../common/SelectInput';
 const PaymentOption =  ({options, value, onChange, totalCost}) => {
     return(        
         <div classsName="container">
-            <div className="well well-sm">
+            <div className="normalPadding">
                 <form>
                     <SelectInput name="paymentType" label="Payment Option" 
                         defaultOption="Payment Option" 
@@ -13,13 +13,6 @@ const PaymentOption =  ({options, value, onChange, totalCost}) => {
                 </form>
                 <p className="text-primary text-left"><strong>Total Cost :</strong> {totalCost}</p>
             </div>
-            <div classsName="row">                
-                <div className="">
-                    <div className="well well-sm">
-                        
-                    </div>                
-                </div>
-            </div>    
         </div>        
     );
 }

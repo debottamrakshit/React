@@ -132,19 +132,19 @@ componentDidMount(){
   render() {    
     return (
       <div className="container">
-          <div className="text-center col-md-12 col-md-offset-0">
-            <input type="submit" value="Save" onClick={this.saveCheckoutInformation}  className="btn btn-primary"/> 
+          <div className="text-right normalPadding">
+            <input type="submit" value="Proceed to Checkout" onClick={this.saveCheckoutInformation}  className="btn btn-primary"/> 
          </div>
-         <div className="text-center col-md-12 col-md-offset-0">
-            <h1 className="bg-success text-left">CHECKOUT PAGE</h1>
-            <h2 className="bg-info lead text-center">Payment Options ....</h2>
+         <div className="col-md-12 noPadding">
+            <h1>CHECKOUT PAGE</h1>
+            <h2 className="collapsible">Select Payment Method</h2>
               <PaymentOption options={this.state.paymentOptions} value={this.state.paymentType}  onChange={this.selectPaymentTypes} totalCost={this.state.totalCheckoutAmount}/>
-              <h2 className="bg-info lead text-center">Address ....</h2>
+              <h2 className="collapsible">Shipping Detail</h2>
               <AddressForm address={this.state.address} 
                 onChange={this.changeDataOnPage.bind(this)} 
                 onSave={this.saveCheckoutInformation} 
                 countries={this.props.countries}  errors={this.state.errors}/>
-            <h2 className="bg-info lead text-center">Product ....</h2>
+            <h2 className="collapsible">Selected Products</h2>
             <KartItemList kartItems={this.state.product} onClick={this.productToRemove} operation={this.state.showRemoveProduct}/>
          </div>
          
