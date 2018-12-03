@@ -189,7 +189,7 @@ function mapStateToProps(state, ownProps){
     });
   }
 
-  let paymentDropDown = [{"text":"Cash On Delivery", "value":"COD" }];
+  let paymentDropDown = [{"text":"Cash On Delivery", "value":"1" }];
   let totalProductCost = 0.00;
 
 

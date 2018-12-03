@@ -1,86 +1,12 @@
 import delay from './delay';
-const CHECKOUT = [  
-    {  
-       "product":[          
-            {  
-                id:"prd001",
-                img:"/shared/images/iphone6s.1.jfif",
-                name:"Apple iPhone 6 (Gold, 1GB RAM, 32GB Storage)",
-                desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
-                price:"10,000.45 INR"
-                
-             },
-             {  
-                id:"prd002",
-                img:"/shared/images/iphone6s.jfif",
-                name:"Apple iPhone 6 (Space Grey, 1GB RAM, 32GB Storage)",
-                desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
-                price:"10,000.45 INR"
-             }
-             ,
-             {  
-                id:"prd003",
-                img:"/shared/images/iphone6s.jfif",
-                name:"Apple iPhone 6 (Space Grey, 1GB RAM, 32GB Storage)",
-                desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
-                price:"10,000.45 INR"
-             },
-             {  
-                id:"prd004",
-                img:"/shared/images/iphone6s.jfif",
-                name:"Apple iPhone 6 (Space Grey, 1GB RAM, 32GB Storage)",
-                desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
-                price:"10,000.45 INR"
-             },
-             {  
-                id:"prd005",
-                img:"/shared/images/iphone6s.jfif",
-                name:"Apple iPhone 6 (Space Grey, 1GB RAM, 32GB Storage)",
-                desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
-                price:"10,000.45 INR"
-             },{  
-                id:"prd006",
-                img:"/shared/images/iphone6s.1.jfif",
-                name:"Apple iPhone 6 (Gold, 1GB RAM, 32GB Storage)",
-                desc:"Phone 6 isn’t simply bigger - it’s better in every way. Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD Display. It’s one continuous form where hardware and software function in perfect unison, creating a new generation of iPhone that’s better by any measure.",
-                price:"10,000.45 INR"
-             }
-       ],
-       "address":[  
-          {  
-             id:"",
-             line1:"",
-             line2:"",
-             city:"",
-             state:"",
-             zip:"",
-             country:"", 
-             countryName:""
-          }
-       ],
-       "payment":[  
-          {  
-             "type":"COD", 
-             "totalCost":"1000.12"
-          }
-       ]
-    }
- ];
+import axios from 'axios';
+
 class checkoutApi{
-    static getCheckoutInfo(){
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(Object.assign([], CHECKOUT))
-            },
-                delay);                      
-        });
-    }
 
     static saveCheckoutInfo(checkout){
          checkout = Object.assign({}, checkout);
          let errors = "";
          return new Promise((resolve, reject) => {
-             setTimeout(() => { 
                 if(checkout){
                     const minAddressLine = 1;                     
                     if(!checkout.address){
@@ -141,10 +67,34 @@ class checkoutApi{
                         reject("No Item to checkout")
                     }
 
+                    let checkoutData = {};
+                    let addressToSubmit = {};
+                    addressToSubmit = checkout.address;
+                    addressToSubmit.country=10;
+                    checkoutData.address = addressToSubmit;
+                    checkoutData.product=checkout.product;               
+                    checkoutData.payment=checkout.payment;
+                    console.log(checkoutData);
+
+                    axios({
+                        method: 'post',
+                        url: 'http://localhost:3300/saveOrder',
+                        data: checkoutData,
+                        config: { headers: {'Content-Type': 'application/json' }}
+                        })
+                        .then(function (response) {                
+                            console.log(response);
+                        })
+                        .catch(function (response) {                
+                            console.log(response);
+                            throw response;
+                        });
+                    resolve(Object.assign({}, checkoutData));  
+
                 }
-                resolve(Object.assign([], checkout));   
-                //CHECKOUT.push(checkout);                
-             }, delay);             
+                
+                 
+                //CHECKOUT.push(checkout);                                      
          });
     }
 
@@ -155,6 +105,9 @@ class checkoutApi{
             }, delay);
         });
     }
+
+
+    
 } 
 
 const EXTRA = [  
