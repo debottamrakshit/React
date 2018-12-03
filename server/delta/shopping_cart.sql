@@ -19,14 +19,14 @@ USE `shopping_cart`;
 -- Dumping structure for table shopping_cart.country
 CREATE TABLE IF NOT EXISTS `country` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
   `code` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=248 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table shopping_cart.country: ~246 rows (approximately)
 /*!40000 ALTER TABLE `country` DISABLE KEYS */;
-INSERT INTO `country` (`id`, `name`, `code`) VALUES
+INSERT INTO `country` (`id`, `code`, `name`) VALUES
 	(2, 'AF', 'Afghanistan'),
 	(3, 'AL', 'Albania'),
 	(4, 'DZ', 'Algeria'),
@@ -332,9 +332,9 @@ CREATE TABLE IF NOT EXISTS `products` (
   `price` int(11) NOT NULL,
   `image` varchar(1000) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
--- Dumping data for table shopping_cart.products: ~6 rows (approximately)
+-- Dumping data for table shopping_cart.products: ~9 rows (approximately)
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`) VALUES
 	(1, 'Gome C7 Note', 'Gome C7 Note device was launched in October, 2018 and features a 6.1 inches screen, IPS LCD capacitive touchscreen, 16M colors', 30000, '/shared/images/phones/1543227808.jpg'),
