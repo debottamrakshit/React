@@ -1,5 +1,6 @@
 import checkoutApi from '../api/checkoutApi';
 import * as TYPES from '../actions/actionTypes';
+import {browserHistory} from 'react-router';
 
 export function loadCheckoutActionSuccess(apiCheckout){
     return {type: TYPES.LOAD_CHECKOUT_SUCCESS, apiCheckout};
@@ -16,8 +17,9 @@ export function removeProductFromKart(checkout){
 
 export function loadCheckout(){  
     return function(dispatch){        
-        return checkoutApi.getCheckoutInfo().then(apiCheckout => {
-            dispatch(loadCheckoutActionSuccess(apiCheckout));
+        return checkoutApi.getCheckoutInfo().then(apiCheckout => {            
+            dispatch(loadCheckoutActionSuccess(apiCheckout));     
+            browserHistory.push("/checkoutSummary");       
         }).catch(error => {
             throw(error);
         });

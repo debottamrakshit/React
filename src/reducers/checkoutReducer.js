@@ -1,12 +1,15 @@
 import * as TYPES from '../actions/actionTypes';
 import INITIAL_STATE from './initialState';
+import {browserHistory} from 'react-router';
 
 export default function checkoutReducer(state = INITIAL_STATE.checkout, action) {
     switch (action.type) {
         case TYPES.LOAD_CHECKOUT_SUCCESS:
             return Object.assign([], action.apiCheckout);
         case TYPES.SAVE_CHECKOUT_SUCCESS:
-            return [...state, Object.assign([], action.checkout)];
+            let newState = Object.assign([],...state);
+            newState = action.checkout;     
+            return newState;
         case TYPES.REMOVE_PRODUCT_FROM_CHECKOUT_SUCCESS:
             return [...state, Object.assign([], action.checkout)];
         case TYPES.ADD_TO_CHECKOUT_SUCCESS:
@@ -17,7 +20,7 @@ export default function checkoutReducer(state = INITIAL_STATE.checkout, action) 
             if (state.length == 0) {
                 state = [
                     ...state,
-                    Object.assign({}, { 'product': [...stateProduct, Object.assign([], Object.assign({}, action.product, { count: 1 }))] })
+                    Object.assign({}, { 'product': [...stateProduct, Object.assign({}, Object.assign({}, action.product, { count: 1 }))] })
                 ];
             } else {
                 const index = state[0].product.reduce((acc, currValue, currIndex, array) => {

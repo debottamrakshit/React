@@ -79,10 +79,16 @@ componentDidMount(){
   saveCheckoutInformation(event){
     console.log("Inside saveCheckoutInformation method event Handler state object: { "+this.state+" }");
     event.preventDefault();
-    let checkoutSubmit = [];
+    let checkoutSubmit = {};
 
-    checkoutSubmit.address=this.state.address;
-    checkoutSubmit.product=this.state.product;
+    checkoutSubmit.address={};
+    checkoutSubmit.address.line1 = this.state.address.line1;
+    checkoutSubmit.address.line2 = this.state.address.line2;
+    checkoutSubmit.address.city = this.state.address.city;
+    checkoutSubmit.address.state = this.state.address.state;
+    checkoutSubmit.address.zip = this.state.address.zip;
+    checkoutSubmit.address.country = this.state.address.country;
+    checkoutSubmit.product = this.state.product;
 
     let type = this.state.paymentType;
     let totalCost = this.state.totalCheckoutAmount;
@@ -91,7 +97,7 @@ componentDidMount(){
     payementTypeToSubmit.type=type;
     payementTypeToSubmit.totalCost = totalCost;
     checkoutSubmit.payment = payementTypeToSubmit;
-    
+    console.log(checkoutSubmit);
     
     this.props.actions.saveCheckout(checkoutSubmit).
     then(() => this.redirect()).
@@ -183,7 +189,7 @@ function mapStateToProps(state, ownProps){
   if(state.countries && state.countries.length > 0){
     formattedDropDown = state.countries.map(country =>{
       return{
-        value: country.code,
+        value: country.id,
         text: country.name
       };
     });

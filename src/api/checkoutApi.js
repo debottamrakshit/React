@@ -11,18 +11,22 @@ class checkoutApi{
                     const minAddressLine = 1;                     
                     if(!checkout.address){
                         errors.concat("No Address is mention in checkout page") 
+                        return false;
                         
                     }else{
                         let addressValidated = checkout.address;
                         if(!addressValidated.line1){
                             reject('Line 1 for address is blank');
+                            return false;
                         }else{                            
                              if(addressValidated.line1.length < minAddressLine){
                                  reject('Line1 must be greater than ${minAddressLine} chars');
+                                 return false;
                              }
                         }
                         if(addressValidated.line2 && addressValidated.line2.length < minAddressLine){
                             reject('Line 2 for address should be greater than ${minAddressLine} chars');
+                            return false;
                         }
 
                         if(!addressValidated.city ){
@@ -30,27 +34,33 @@ class checkoutApi{
                         }else{
                             if(addressValidated.city.length < minAddressLine){
                                 reject('City must be greater than ${minAddressLine} chars');
+                                return false;
                             }                            
                         }
 
                         if(!addressValidated.state ){
                             reject('State is required');
+                            return false;
                         }else{
                             if(addressValidated.state.length < minAddressLine || addressValidated.state.length > 2 ){
                                 reject('State must be equals to 2');
+                                return false;
                             }
                         }
                         if(!addressValidated.zip ){
                             reject('Zip is required');
+                            return false;
                         }else{
                             var numbers = /^[0-9]+$/; 
                             if(!addressValidated.zip.match(numbers)){
                                 reject('Zip Code must be Numeric');
+                                return false;
                             }
                         }
 
                         if(!addressValidated.country ){
                             reject('Country is required');
+                            return false;
                         }
                     }
                     
@@ -58,38 +68,37 @@ class checkoutApi{
                         let paymentType = checkout.payment.type;
                         if(paymentType == "")  {
                             reject('Please select the Payment Type');
+                            return false;
                         }
                     }else{
                         reject('Please select the Payment Type');
+                        return false;
                     }                   
                     
                     if(!checkout.product || checkout.product.length == 0) {
-                        reject("No Item to checkout")
+                        reject("No Item to checkout");
+                        return false;
                     }
 
                     let checkoutData = {};
                     let addressToSubmit = {};
                     addressToSubmit = checkout.address;
-                    addressToSubmit.country=10;
                     checkoutData.address = addressToSubmit;
                     checkoutData.product=checkout.product;               
                     checkoutData.payment=checkout.payment;
-                    console.log(checkoutData);
 
                     axios({
                         method: 'post',
                         url: 'http://localhost:3300/saveOrder',
                         data: checkoutData,
-                        config: { headers: {'Content-Type': 'application/json' }}
                         })
                         .then(function (response) {                
-                            console.log(response);
+                            resolve(checkout);                             
                         })
                         .catch(function (response) {                
                             console.log(response);
                             throw response;
                         });
-                    resolve(Object.assign({}, checkoutData));  
 
                 }
                 

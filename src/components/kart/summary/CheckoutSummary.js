@@ -8,18 +8,16 @@ class CheckoutSummary extends React.Component {
    constructor(props){
        super(props);
        this.state = {
-           address: props.address,
+           address: props.state,
            product: props.product,
            payment: props.paymentProps
        } 
    } 
 
   render() {
+    console.log(this.props);
     return (
         <div className="container">
-            <div className="text-right normalPadding">
-                <input type="submit" value="Submit Order" className="btn btn-primary"/> 
-             </div>
             <h1>Order Summary</h1>
             <div className="row">
               <div className="col-md-12">           
@@ -41,7 +39,7 @@ class CheckoutSummary extends React.Component {
                         
                     </div>
                     <div className="col-sm-3">         
-                        {this.state.payment.type == "COD" ? "Cash On Delivery": ""}
+                        {this.state.payment.type == "1" ? "Cash On Delivery": ""}
                     </div>
                 </div>
                 <div className="row">
@@ -50,7 +48,7 @@ class CheckoutSummary extends React.Component {
                         
                     </div>
                     <div className="col-sm-3">         
-                        PLACEHOLDER
+                        5456456
                     </div>
                 </div> 
                 <div className="row">
@@ -59,7 +57,7 @@ class CheckoutSummary extends React.Component {
                         
                     </div>
                     <div className="col-sm-3">         
-                      {this.state.payment.totalCost}
+                      ${this.state.payment.totalCost}
                     </div>
                 </div>
             </div>
@@ -68,7 +66,7 @@ class CheckoutSummary extends React.Component {
                     <h2 className="collapsible">Shipped To</h2>
                 </div>   
             </div>
-            <AddressSummary address={this.state.address} />
+            <AddressSummary address={this.props.address} />
 
             <div className="row">
                 <div className="col-md-12">           
@@ -92,7 +90,7 @@ CheckoutSummary.propTypes = {
 }
 
 function getCountryName(countries, countryId){  
-    let country = countries.filter(country => country.code == countryId);
+    let country = countries.filter(country => country.id == countryId);
     if(country)
         return country[0].name;
     return null;
@@ -113,7 +111,7 @@ function mapStateToProps(state){
             //fetch the last one
             index = (checkoutState.length -1)
         }
-        checkoutItem = state.checkout[index];
+        checkoutItem = state.checkout;
         if(checkoutItem){
             if(checkoutItem.address){
                 address=checkoutItem.address;
@@ -128,7 +126,7 @@ function mapStateToProps(state){
             if(checkoutItem.payment){
                 payment = checkoutItem.payment;
             }
-        }        
+        } 
     }
     return{
         address: address, 

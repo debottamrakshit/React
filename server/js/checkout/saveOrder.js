@@ -2,9 +2,9 @@ const conn = require('../common/conn.js');
 
 module.exports = function (req,res) {
 	const getOrder = req.body;
-	const paymentType = getOrder[0].payment.type;
-	const getAllProducts = getOrder[0].product;
-	const shippingDetail = getOrder[0].address;
+	const paymentType = getOrder.payment.type;
+	const getAllProducts = getOrder.product;
+	const shippingDetail = getOrder.address;
 	conn.query("INSERT INTO orders(`user_id`,`payment_type`) VALUES('1','"+paymentType+"')", function (err, result, fields) {
 	    if (err) throw err;
 	    const lastInsertID = result.insertId;
@@ -12,7 +12,7 @@ module.exports = function (req,res) {
 			if (err) throw err;
 		    for(var x=0;x<getAllProducts.length;x++){
 		    	const productId = getAllProducts[x].id;
-		    	const qty = getAllProducts[x].qty;
+		    	const qty = getAllProducts[x].count;
 				conn.query("INSERT INTO order_details(`order_id`,`product_id`,`qty`) VALUES('"+lastInsertID+"','"+productId+"','"+qty+"')", function (err, result, fields) {
 					if (err) throw err;				
 				});	    
